@@ -1,0 +1,27 @@
+[package]
+name = "gsichtl"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.91"
+license = "MIT"
+description = "Deterministic pixel-art avatars from any seed: monsters, nerdy faces and crests"
+repository = "https://github.com/cebor/gsichtl"
+keywords = ["avatar", "pixel-art", "identicon", "generator"]
+categories = ["graphics", "multimedia::images"]
+
+[features]
+png = ["dep:png"]
+
+[dependencies]
+# Mixes the seed into the draws. BLAKE3's output is fixed by its
+# specification (https://github.com/BLAKE3-team/BLAKE3-specs), so a seed keeps
+# its picture across versions of this dependency.
+blake3 = "1.8"
+png = { version = "0.18", optional = true }
+
+[[example]]
+name = "render"
+required-features = ["png"]
+
+[lints.rust]
+unsafe_code = "forbid"
