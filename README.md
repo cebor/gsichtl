@@ -33,18 +33,16 @@ faces that differ only in their accent look the same.
 
 ## Installation
 
-gsichtl is not on crates.io. Use it from git:
-
 ```toml
 [dependencies]
-gsichtl = { git = "https://github.com/cebor/gsichtl.git", tag = "v0.1.0" }
+gsichtl = "0.1"
 ```
 
 For PNG output, turn on the `png` feature:
 
 ```toml
 [dependencies]
-gsichtl = { git = "https://github.com/cebor/gsichtl.git", tag = "v0.1.0", features = ["png"] }
+gsichtl = { version = "0.1", features = ["png"] }
 ```
 
 ## Usage

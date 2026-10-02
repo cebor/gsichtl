@@ -25,3 +25,7 @@ required-features = ["png"]
 
 [lints.rust]
 unsafe_code = "forbid"
+
+# docs.rs documents Avatar::to_png, which needs the `png` feature.
+[package.metadata.docs.rs]
+all-features = true

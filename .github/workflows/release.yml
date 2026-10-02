@@ -1,0 +1,62 @@
+# Publishes a tag to crates.io once the CI suites have passed on it.
+#
+# To release: set `version` in Cargo.toml, run `cargo update --workspace` so Cargo.lock
+# follows, commit that as "Release X.Y.Z", then
+#
+#     git tag -a vX.Y.Z -m "gsichtl X.Y.Z" && git push origin main vX.Y.Z
+#
+# The job authenticates by trusted publishing, in the `release` environment, so no secret is
+# stored anywhere. crates.io only accepts a trusted publisher for a crate that already exists,
+# so 0.1.0 went out by hand. A version already on crates.io is skipped, so a failed run can be
+# re-run as it is.
+
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: read
+
+jobs:
+  ci:
+    uses: ./.github/workflows/ci.yml
+
+  version:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      # A tag that does not match would publish whatever version Cargo.toml happens to hold.
+      - name: The tag matches the crate version
+        run: |
+          version=$(sed -n '/^\[package\]/,/^\[/ s/^version = "\(.*\)"/\1/p' Cargo.toml)
+          [[ $GITHUB_REF_NAME == "v$version" ]] ||
+            { echo "::error::tag $GITHUB_REF_NAME, but Cargo.toml is at $version"; exit 1; }
+
+  crates:
+    needs: [ci, version]
+    runs-on: ubuntu-latest
+    environment: release
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v7
+      - uses: dtolnay/rust-toolchain@stable
+      - name: Skip a version already on crates.io
+        id: published
+        run: |
+          version=$(sed -n '/^\[package\]/,/^\[/ s/^version = "\(.*\)"/\1/p' Cargo.toml)
+          if curl -sf https://index.crates.io/gs/ic/gsichtl |
+              jq -e --arg v "$version" 'select(.vers == $v)' >/dev/null; then
+            echo "::notice::gsichtl@$version is already on crates.io"
+            echo "skip=true" >>"$GITHUB_OUTPUT"
+          fi
+      - uses: rust-lang/crates-io-auth-action@v1
+        if: steps.published.outputs.skip != 'true'
+        id: auth
+      - run: cargo publish --locked
+        if: steps.published.outputs.skip != 'true'
+        env:
+          CARGO_REGISTRY_TOKEN: ${{ steps.auth.outputs.token }}
