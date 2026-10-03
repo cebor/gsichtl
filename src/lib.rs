@@ -3,7 +3,8 @@
 //! [`monster`] and [`nerd`] draw 8x8 faces, [`face`] picks one of the two by
 //! the seed, [`crest`] draws a 10x10 shield with a division and an emblem,
 //! [`badge`] a 12x12 round badge with a division, an emblem and sometimes
-//! a rim, and [`realm`] a 20x20 floating island, planet or patch of sea.
+//! a rim, [`realm`] a 20x20 floating island, planet or patch of sea, and
+//! [`retro`] a 20x20 game sprite.
 //! The seed is any byte string, typically a public user or group id.
 //!
 //! ```
@@ -34,6 +35,7 @@ mod grid;
 mod monster;
 mod nerd;
 mod realm;
+mod retro;
 
 use draws::Draws;
 
@@ -50,6 +52,7 @@ pub enum Kind {
     Crest,
     Badge,
     Realm,
+    Retro,
 }
 
 /// A square grid of colored cells on a background.
@@ -108,6 +111,14 @@ pub fn badge(seed: &[u8]) -> Avatar {
 /// stand free: render it with [`Avatar::to_rgba_transparent`].
 pub fn realm(seed: &[u8]) -> Avatar {
     realm::build(realm::draw(&mut Draws::new(realm::CONTEXT, seed)))
+}
+
+/// A 20x20 retro game sprite, for groups: a creature, a weapon, an item or
+/// a piece of old tech in neon colors, sometimes in front of an explosion,
+/// a blood splatter or sparkles. Made to stand free: render it with
+/// [`Avatar::to_rgba_transparent`].
+pub fn retro(seed: &[u8]) -> Avatar {
+    retro::build(retro::draw(&mut Draws::new(retro::CONTEXT, seed)))
 }
 
 impl Avatar {

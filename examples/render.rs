@@ -1,4 +1,4 @@
-//! Writes sample faces, crests, badges and realms as PNG files.
+//! Writes sample faces, crests, badges, realms and retro sprites as PNG files.
 //!
 //! `cargo run --example render --features png -- <out-dir> [count]`
 
@@ -28,6 +28,12 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         std::fs::write(
             dir.join(format!("realm-{n:02}.png")),
             realm.to_png_transparent(10, 4)?,
+        )?;
+        let retro = gsichtl::retro(format!("community-{n}").as_bytes());
+        // Like a realm: 208 px, on a transparent background.
+        std::fs::write(
+            dir.join(format!("retro-{n:02}.png")),
+            retro.to_png_transparent(10, 4)?,
         )?;
     }
     Ok(())
