@@ -60,7 +60,7 @@ pub struct Avatar {
     cells: Vec<Option<Rgb>>,
 }
 
-/// An opaque RGBA8 image, row-major.
+/// An RGBA8 image, row-major, with straight (not premultiplied) alpha.
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub struct Rgba {
     pub width: u32,
@@ -127,8 +127,40 @@ impl Avatar {
 
     /// Renders every cell as a `cell_px` square inside a `margin_px` border of
     /// background. The image is `side * cell_px + 2 * margin_px` pixels wide
-    /// and high, at most 3060.
+    /// and high, at most 3060. The image is opaque.
     pub fn to_rgba(&self, cell_px: u8, margin_px: u8) -> Rgba {
+        self.render(cell_px, margin_px, Some(self.background))
+    }
+
+    /// [`Avatar::to_rgba`], but the background and the margin are fully
+    /// transparent (`[0, 0, 0, 0]`); painted cells stay opaque.
+    pub fn to_rgba_transparent(&self, cell_px: u8, margin_px: u8) -> Rgba {
+        self.render(cell_px, margin_px, None)
+    }
+
+    /// [`Avatar::to_rgba`], encoded as PNG.
+    #[cfg(feature = "png")]
+    pub fn to_png(&self, cell_px: u8, margin_px: u8) -> Result<Vec<u8>, png::EncodingError> {
+        encode_png(&self.to_rgba(cell_px, margin_px))
+    }
+
+    /// [`Avatar::to_rgba_transparent`], encoded as PNG.
+    #[cfg(feature = "png")]
+    pub fn to_png_transparent(
+        &self,
+        cell_px: u8,
+        margin_px: u8,
+    ) -> Result<Vec<u8>, png::EncodingError> {
+        encode_png(&self.to_rgba_transparent(cell_px, margin_px))
+    }
+
+    /// Background and margin pixels are `background`, opaque, or fully
+    /// transparent when it is `None`.
+    fn render(&self, cell_px: u8, margin_px: u8, background: Option<Rgb>) -> Rgba {
+        let empty = match background {
+            Some([r, g, b]) => [r, g, b, u8::MAX],
+            None => [0; 4],
+        };
         let cell = u32::from(cell_px);
         let margin = u32::from(margin_px);
         let grid = u32::from(self.side) * cell;
@@ -142,12 +174,14 @@ impl Avatar {
                     // Both quotients are below `side`, a `u8`.
                     let x = u8::try_from((px - margin) / cell).unwrap_or(u8::MAX);
                     let y = u8::try_from((py - margin) / cell).unwrap_or(u8::MAX);
-                    self.cell(x, y).unwrap_or(self.background)
+                    self.cell(x, y)
                 } else {
-                    self.background
+                    None
                 };
-                pixels.extend_from_slice(&color);
-                pixels.push(u8::MAX);
+                match color {
+                    Some([r, g, b]) => pixels.extend_from_slice(&[r, g, b, u8::MAX]),
+                    None => pixels.extend_from_slice(&empty),
+                }
             }
         }
         Rgba {
@@ -156,18 +190,16 @@ impl Avatar {
             pixels,
         }
     }
+}
 
-    /// [`Avatar::to_rgba`], encoded as PNG.
-    #[cfg(feature = "png")]
-    pub fn to_png(&self, cell_px: u8, margin_px: u8) -> Result<Vec<u8>, png::EncodingError> {
-        let image = self.to_rgba(cell_px, margin_px);
-        let mut out = Vec::new();
-        let mut encoder = png::Encoder::new(&mut out, image.width, image.height);
-        encoder.set_color(png::ColorType::Rgba);
-        encoder.set_depth(png::BitDepth::Eight);
-        let mut writer = encoder.write_header()?;
-        writer.write_image_data(&image.pixels)?;
-        writer.finish()?;
-        Ok(out)
-    }
+#[cfg(feature = "png")]
+fn encode_png(image: &Rgba) -> Result<Vec<u8>, png::EncodingError> {
+    let mut out = Vec::new();
+    let mut encoder = png::Encoder::new(&mut out, image.width, image.height);
+    encoder.set_color(png::ColorType::Rgba);
+    encoder.set_depth(png::BitDepth::Eight);
+    let mut writer = encoder.write_header()?;
+    writer.write_image_data(&image.pixels)?;
+    writer.finish()?;
+    Ok(out)
 }

@@ -82,6 +82,15 @@ std::fs::write("alice.png", png)?;
 An image is `side * cell_px + 2 * margin_px` pixels wide and high, at most
 3060. `cell_px == 0` gives a plain square of background.
 
+`to_rgba` and `to_png` are opaque. `to_rgba_transparent` and
+`to_png_transparent` render the same picture, but leave the background and
+the margin fully transparent, so the avatar stands free on your own surface:
+
+```rust
+let image = gsichtl::crest(b"community-7").to_rgba_transparent(3, 2);
+assert_eq!(&image.pixels[..4], &[0, 0, 0, 0]);
+```
+
 ## How it works
 
 The seed goes through BLAKE3 in derive-key mode, with one context string per

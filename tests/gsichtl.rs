@@ -91,3 +91,38 @@ fn rgba_places_cells_and_margin() {
     }
     assert!(image.pixels.chunks(4).all(|p| p[3] == 255));
 }
+
+#[test]
+fn transparent_rgba_clears_only_the_background() {
+    let crest = gsichtl::crest(b"x");
+    let image = crest.to_rgba_transparent(3, 2);
+    assert_eq!((image.width, image.height), (34, 34));
+    let pixel = |x: usize, y: usize| {
+        let i = (y * 34 + x) * 4;
+        [
+            image.pixels[i],
+            image.pixels[i + 1],
+            image.pixels[i + 2],
+            image.pixels[i + 3],
+        ]
+    };
+    assert_eq!(pixel(0, 0), [0, 0, 0, 0]);
+    let mut empty = 0;
+    for y in 0..crest.side() {
+        for x in 0..crest.side() {
+            let want = match crest.cell(x, y) {
+                Some([r, g, b]) => [r, g, b, 255],
+                None => {
+                    empty += 1;
+                    [0, 0, 0, 0]
+                }
+            };
+            assert_eq!(
+                pixel(2 + 3 * x as usize + 1, 2 + 3 * y as usize + 1),
+                want,
+                "cell ({x}, {y})"
+            );
+        }
+    }
+    assert!(empty > 0);
+}
