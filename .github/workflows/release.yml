@@ -1,14 +1,19 @@
-# Publishes a tag to crates.io once the CI suites have passed on it.
+# Publishes a tag to crates.io once the CI suites have passed on it, then as a GitHub release.
 #
-# To release: set `version` in Cargo.toml, run `cargo update --workspace` so Cargo.lock
-# follows, commit that as "Release X.Y.Z", then
+# To release, on a clean main:
 #
-#     git tag -a vX.Y.Z -m "gsichtl X.Y.Z" && git push origin main vX.Y.Z
+#     scripts/release.sh X.Y.Z && git push origin main vX.Y.Z
 #
-# The job authenticates by trusted publishing, in the `release` environment, so no secret is
-# stored anywhere. crates.io only accepts a trusted publisher for a crate that already exists,
-# so 0.1.0 went out by hand. A version already on crates.io is skipped, so a failed run can be
-# re-run as it is.
+# The script writes the CHANGELOG.md section from the `Changelog:` trailers, bumps Cargo.toml
+# and Cargo.lock, commits that as "Release X.Y.Z" and creates the annotated tag. This workflow
+# runs CI, checks that the tag matches Cargo.toml and that CHANGELOG.md has a section for it,
+# publishes to crates.io and then creates the GitHub release "gsichtl X.Y.Z" with that section
+# as its notes. CONTRIBUTING.md has the details.
+#
+# The crates job authenticates by trusted publishing, in the `release` environment, so no
+# secret is stored anywhere. crates.io only accepts a trusted publisher for a crate that already
+# exists, so 0.1.0 went out by hand. A version already on crates.io and a GitHub release that
+# already exists are skipped, so a failed run can be re-run as it is.
 
 name: Release
 
@@ -33,6 +38,11 @@ jobs:
           version=$(sed -n '/^\[package\]/,/^\[/ s/^version = "\(.*\)"/\1/p' Cargo.toml)
           [[ $GITHUB_REF_NAME == "v$version" ]] ||
             { echo "::error::tag $GITHUB_REF_NAME, but Cargo.toml is at $version"; exit 1; }
+      # The GitHub release takes its notes from this section, after crates.io has the version.
+      - name: CHANGELOG.md has a section for the tag
+        run: |
+          grep -qF "## [${GITHUB_REF_NAME#v}]" CHANGELOG.md ||
+            { echo "::error::CHANGELOG.md has no section for ${GITHUB_REF_NAME#v}"; exit 1; }
 
   crates:
     needs: [ci, version]
@@ -60,3 +70,30 @@ jobs:
         if: steps.published.outputs.skip != 'true'
         env:
           CARGO_REGISTRY_TOKEN: ${{ steps.auth.outputs.token }}
+
+  github:
+    needs: crates
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+      - name: Release notes from CHANGELOG.md
+        run: |
+          awk -v head="## [${GITHUB_REF_NAME#v}]" '
+            index($0, head) == 1 { inside = 1; next }
+            inside && /^## \[/ { exit }
+            inside { print }
+          ' CHANGELOG.md >notes.md
+          cat notes.md
+      # Skipped when it exists, so a failed run can be re-run as it is.
+      - name: Publish the GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1; then
+            echo "::notice::the GitHub release $GITHUB_REF_NAME already exists"
+          else
+            gh release create "$GITHUB_REF_NAME" --verify-tag \
+              --title "gsichtl ${GITHUB_REF_NAME#v}" --notes-file notes.md
+          fi
