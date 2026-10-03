@@ -5,9 +5,7 @@ Deterministic pixel-art avatars from any seed. *Gsichtl* is Bavarian for
 
 ![32 generated faces](docs/faces.png)
 
-![32 generated crests](docs/crests.png)
-
-![32 generated badges](docs/badges.png)
+![16 generated crests and 16 generated badges](docs/groups.png)
 
 The seed is any byte string, typically a public user or group id. The same
 seed always gives the same picture, so every client draws it locally and
@@ -105,13 +103,16 @@ cargo run --example render --features png -- <dir> [count]
 ```
 
 writes `face-NN.png` from the seed `user-N`, and `crest-NN.png` and
-`badge-NN.png` from the seed `community-N` into `<dir>`, with 16 px cells and
-an 8 px margin. The sheets above are montages of 32 of each:
+`badge-NN.png` from the seed `community-N` into `<dir>`. Faces and badges
+have 16 px cells and an 8 px margin. Crests have 18 px cells and a 14 px
+margin, so they are 208 px wide like a badge. The sheets above show 32 faces,
+and 16 crests above 16 badges:
 
 ```sh
-magick montage <dir>/face-*.png  -tile 8x -geometry +4+4 -background none docs/faces.png
-magick montage <dir>/crest-*.png -tile 8x -geometry +4+4 -background none docs/crests.png
-magick montage <dir>/badge-*.png -tile 8x -geometry +4+4 -background none docs/badges.png
+magick montage <dir>/face-*.png -tile 8x -geometry +4+4 -background none docs/faces.png
+magick montage <dir>/crest-0?.png <dir>/crest-1[0-5].png \
+    <dir>/badge-0?.png <dir>/badge-1[0-5].png \
+    -tile 8x -geometry +4+4 -background none docs/groups.png
 ```
 
 ## Stability

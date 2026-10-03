@@ -19,7 +19,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         let face = gsichtl::face(format!("user-{n}").as_bytes());
         std::fs::write(dir.join(format!("face-{n:02}.png")), face.to_png(16, 8)?)?;
         let crest = gsichtl::crest(format!("community-{n}").as_bytes());
-        std::fs::write(dir.join(format!("crest-{n:02}.png")), crest.to_png(16, 8)?)?;
+        // 18 px cells and a 14 px margin: 208 px, as large as a badge, so both fit one sheet.
+        std::fs::write(dir.join(format!("crest-{n:02}.png")), crest.to_png(18, 14)?)?;
         let badge = gsichtl::badge(format!("community-{n}").as_bytes());
         std::fs::write(dir.join(format!("badge-{n:02}.png")), badge.to_png(16, 8)?)?;
     }
