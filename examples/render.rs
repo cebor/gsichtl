@@ -1,4 +1,4 @@
-//! Writes sample faces, crests and badges as PNG files.
+//! Writes sample faces, crests, badges and realms as PNG files.
 //!
 //! `cargo run --example render --features png -- <out-dir> [count]`
 
@@ -23,6 +23,12 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         std::fs::write(dir.join(format!("crest-{n:02}.png")), crest.to_png(18, 14)?)?;
         let badge = gsichtl::badge(format!("community-{n}").as_bytes());
         std::fs::write(dir.join(format!("badge-{n:02}.png")), badge.to_png(16, 8)?)?;
+        let realm = gsichtl::realm(format!("community-{n}").as_bytes());
+        // 10 px cells and a 4 px margin: 208 px like a badge, on a transparent background.
+        std::fs::write(
+            dir.join(format!("realm-{n:02}.png")),
+            realm.to_png_transparent(10, 4)?,
+        )?;
     }
     Ok(())
 }

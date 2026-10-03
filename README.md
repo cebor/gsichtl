@@ -5,7 +5,7 @@ Deterministic pixel-art avatars from any seed. *Gsichtl* is Bavarian for
 
 ![32 generated faces](docs/faces.png)
 
-![16 generated crests and 16 generated badges](docs/groups.png)
+![16 generated crests, 16 generated badges and 16 generated realms](docs/groups.png)
 
 The seed is any byte string, typically a public user or group id. The same
 seed always gives the same picture, so every client draws it locally and
@@ -31,6 +31,13 @@ an optional feature.
   division, an emblem and sometimes a metal rim, for groups. 57,600 badges:
   4 backgrounds, 6 fields, 5 second fields, 2 metals, 3 shapes, with or
   without a rim, 5 divisions and 8 emblems.
+- `gsichtl::realm(seed)`: a 20x20 small world for groups: a floating island,
+  a planet or a floating patch of sea, with a landmark, a sky detail and
+  sometimes a waterfall or a ring. Made to stand free, rendered with
+  `to_rgba_transparent` or `to_png_transparent`. 34,560 realms:
+  4 backgrounds, 3 shapes (an island counts twice in the draw), 6 biomes,
+  5 landmarks per shape, 6 accents, with or without a waterfall or ring, and
+  4 sky details.
 
 The face counts are upper bounds: where no part uses the accent color, two
 faces that differ only in their accent look the same.
@@ -95,8 +102,9 @@ assert_eq!(&image.pixels[..4], &[0, 0, 0, 0]);
 
 The seed goes through BLAKE3 in derive-key mode, with one context string per
 generator: `gsichtl 2026-10-02 face v1`, `gsichtl 2026-10-02 monster v1`,
-`gsichtl 2026-10-02 nerd v1`, `gsichtl 2026-10-02 crest v1` and
-`gsichtl 2026-10-03 badge v1`. The extendable output is the stream of draws:
+`gsichtl 2026-10-02 nerd v1`, `gsichtl 2026-10-02 crest v1`,
+`gsichtl 2026-10-03 badge v1` and `gsichtl 2026-10-03 realm v1`. The
+extendable output is the stream of draws:
 each draw takes 4 bytes, modulo the number of choices. The parts are small
 character grids, painted in a fixed order. Eyes, brows and mouths are clipped
 to the painted body, so they never leave the silhouette.
@@ -111,16 +119,18 @@ picture.
 cargo run --example render --features png -- <dir> [count]
 ```
 
-writes `face-NN.png` from the seed `user-N`, and `crest-NN.png` and
-`badge-NN.png` from the seed `community-N` into `<dir>`. Faces and badges
-have 16 px cells and an 8 px margin. Crests have 18 px cells and a 14 px
-margin, so they are 208 px wide like a badge. The sheets above show 32 faces,
-and 16 crests above 16 badges:
+writes `face-NN.png` from the seed `user-N`, and `crest-NN.png`,
+`badge-NN.png` and `realm-NN.png` from the seed `community-N` into `<dir>`.
+Faces and badges have 16 px cells and an 8 px margin. Crests have 18 px cells
+and a 14 px margin, realms 10 px cells and a 4 px margin on a transparent
+background, so both are 208 px wide like a badge. The sheets above show
+32 faces, and 16 crests above 16 badges above 16 realms:
 
 ```sh
 magick montage <dir>/face-*.png -tile 8x -geometry +4+4 -background none docs/faces.png
 magick montage <dir>/crest-0?.png <dir>/crest-1[0-5].png \
     <dir>/badge-0?.png <dir>/badge-1[0-5].png \
+    <dir>/realm-0?.png <dir>/realm-1[0-5].png \
     -tile 8x -geometry +4+4 -background none docs/groups.png
 ```
 

@@ -2,8 +2,8 @@
 //!
 //! [`monster`] and [`nerd`] draw 8x8 faces, [`face`] picks one of the two by
 //! the seed, [`crest`] draws a 10x10 shield with a division and an emblem,
-//! and [`badge`] a 12x12 round badge with a division, an emblem and sometimes
-//! a rim.
+//! [`badge`] a 12x12 round badge with a division, an emblem and sometimes
+//! a rim, and [`realm`] a 20x20 floating island, planet or patch of sea.
 //! The seed is any byte string, typically a public user or group id.
 //!
 //! ```
@@ -33,6 +33,7 @@ mod draws;
 mod grid;
 mod monster;
 mod nerd;
+mod realm;
 
 use draws::Draws;
 
@@ -48,6 +49,7 @@ pub enum Kind {
     Nerd,
     Crest,
     Badge,
+    Realm,
 }
 
 /// A square grid of colored cells on a background.
@@ -99,6 +101,13 @@ pub fn crest(seed: &[u8]) -> Avatar {
 /// A 12x12 round badge, for groups.
 pub fn badge(seed: &[u8]) -> Avatar {
     badge::build(badge::draw(&mut Draws::new(badge::CONTEXT, seed)))
+}
+
+/// A 20x20 realm, for groups: a floating island, a planet or a floating
+/// patch of sea, with a landmark. Half of all realms are islands. Made to
+/// stand free: render it with [`Avatar::to_rgba_transparent`].
+pub fn realm(seed: &[u8]) -> Avatar {
+    realm::build(realm::draw(&mut Draws::new(realm::CONTEXT, seed)))
 }
 
 impl Avatar {

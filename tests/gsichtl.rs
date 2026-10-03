@@ -19,11 +19,13 @@ fn seeds_keep_their_pictures() {
         fingerprint(&gsichtl::nerd(b"alice")),
         fingerprint(&gsichtl::crest(b"alice")),
         fingerprint(&gsichtl::badge(b"alice")),
+        fingerprint(&gsichtl::realm(b"alice")),
         fingerprint(&gsichtl::face(&zero)),
         fingerprint(&gsichtl::monster(&zero)),
         fingerprint(&gsichtl::nerd(&zero)),
         fingerprint(&gsichtl::crest(&zero)),
         fingerprint(&gsichtl::badge(&zero)),
+        fingerprint(&gsichtl::realm(&zero)),
     ];
     let want = [
         "b79f342b2e7442884798392a11322461b9a4cdb70cce51d9cc24c06bcddff32a",
@@ -31,11 +33,13 @@ fn seeds_keep_their_pictures() {
         "157756544a686e50e5ad217928b15346484e143f7e8e94e59e311d58e312867b",
         "7bf1be0e54721a0bb29df909393911c1efea3c8214e7eee0937f8cab2eb2cffe",
         "956b990ab687f4e2ded29257750684fcf231b02a62129ed66b6545bbe44acba9",
+        "827dedecc3ed64dd12ca01093fd71c82b6d729bc2ad8c17e0438d6d8a8f4fd82",
         "0bc86f28b5b9909abb0f000a871953b2cd68e3f3d44ff1b4ee8a3949b7b77cde",
         "e444dc102577ec0713cf8bf1e2c787e35ad3e323964f05cf7c86a4db9dd52af5",
         "16f5370130d7c99666b42fbd9ed28f50f9a116ba87651b277a4baa39c31f0e1f",
         "3e834c8851233b181d6f0e979f3bc9b0fc9c4d1cc73d2a10b2375380bd9d4243",
         "b08567a921a7b9a0b678ad211f9f2bab81d701ba0e63efa168131a4caa3f6988",
+        "b75358fe3b1d364ab8728aa1cdd10d8bb018ae2f09a0b39e36885426a9269852",
     ];
     assert_eq!(got, want);
 }
@@ -56,6 +60,8 @@ fn distinct_seeds_look_distinct() {
     assert!(distinct(gsichtl::crest) >= 950);
     // Only 57,600 badges exist, so a few collisions in 1000 are expected.
     assert!(distinct(gsichtl::badge) >= 950);
+    // 34,560 realms, islands twice as likely: about 32 collisions in 1000 are expected.
+    assert!(distinct(gsichtl::realm) >= 940);
 }
 
 #[test]
