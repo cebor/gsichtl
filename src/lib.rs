@@ -3,8 +3,9 @@
 //! [`monster`] and [`nerd`] draw 8x8 faces, [`face`] picks one of the two by
 //! the seed, [`crest`] draws a 10x10 shield with a division and an emblem,
 //! [`badge`] a 12x12 round badge with a division, an emblem and sometimes
-//! a rim, [`realm`] a 20x20 floating island, planet or patch of sea, and
-//! [`retro`] a 20x20 game sprite.
+//! a rim, [`realm`] a 20x20 floating island, planet or patch of sea,
+//! [`retro`] a 20x20 game sprite, and [`icon`] picks a realm or a retro
+//! sprite by the seed.
 //! The seed is any byte string, typically a public user or group id.
 //!
 //! ```
@@ -43,6 +44,7 @@ use draws::Draws;
 pub type Rgb = [u8; 3];
 
 const FACE_CONTEXT: &str = "gsichtl 2026-10-02 face v1";
+const ICON_CONTEXT: &str = "gsichtl 2026-10-03 icon v1";
 
 /// What a generator drew.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
@@ -119,6 +121,21 @@ pub fn realm(seed: &[u8]) -> Avatar {
 /// [`Avatar::to_rgba_transparent`].
 pub fn retro(seed: &[u8]) -> Avatar {
     retro::build(retro::draw(&mut Draws::new(retro::CONTEXT, seed)))
+}
+
+/// A realm or a retro sprite, chosen by the seed: the group counterpart of
+/// [`face`]. Made to stand free: render it with
+/// [`Avatar::to_rgba_transparent`].
+///
+/// The choice consumes draws, so `icon(seed)` is not necessarily
+/// `realm(seed)` or `retro(seed)` for the same seed.
+pub fn icon(seed: &[u8]) -> Avatar {
+    let mut draws = Draws::new(ICON_CONTEXT, seed);
+    if draws.pick(2) == 0 {
+        realm::build(realm::draw(&mut draws))
+    } else {
+        retro::build(retro::draw(&mut draws))
+    }
 }
 
 impl Avatar {

@@ -44,6 +44,9 @@ an optional feature.
   designs in the style of classic games. Made to stand free like a realm.
   21,504 retros: 4 backgrounds, 24 motifs, 8 colors, 7 second colors and
   4 effects.
+- `gsichtl::icon(seed)`: a realm or a retro sprite, chosen by the seed (about
+  half each), the group counterpart of `face`. It is not necessarily
+  `realm(seed)` or `retro(seed)`.
 
 The face counts are upper bounds: where no part uses the accent color, two
 faces that differ only in their accent look the same.
@@ -109,8 +112,9 @@ assert_eq!(&image.pixels[..4], &[0, 0, 0, 0]);
 The seed goes through BLAKE3 in derive-key mode, with one context string per
 generator: `gsichtl 2026-10-02 face v1`, `gsichtl 2026-10-02 monster v1`,
 `gsichtl 2026-10-02 nerd v1`, `gsichtl 2026-10-02 crest v1`,
-`gsichtl 2026-10-03 badge v1`, `gsichtl 2026-10-03 realm v1` and
-`gsichtl 2026-10-03 retro v1`. The extendable output is the stream of draws:
+`gsichtl 2026-10-03 badge v1`, `gsichtl 2026-10-03 realm v1`,
+`gsichtl 2026-10-03 retro v1` and `gsichtl 2026-10-03 icon v1`. The
+extendable output is the stream of draws:
 each draw takes 4 bytes, modulo the number of choices. The parts are small
 character grids, painted in a fixed order. Eyes, brows and mouths are clipped
 to the painted body, so they never leave the silhouette.
