@@ -7,6 +7,8 @@ Deterministic pixel-art avatars from any seed. *Gsichtl* is Bavarian for
 
 ![32 generated crests](docs/crests.png)
 
+![32 generated badges](docs/badges.png)
+
 The seed is any byte string, typically a public user or group id. The same
 seed always gives the same picture, so every client draws it locally and
 nothing has to be stored or sent. The crate does no I/O, is
@@ -27,6 +29,10 @@ an optional feature.
 - `gsichtl::crest(seed)`: a 10x10 shield with a division and an emblem, for
   groups. 28,800 crests: 4 backgrounds, 6 fields, 5 second fields, 2 metals,
   3 shields, 5 divisions and 8 emblems.
+- `gsichtl::badge(seed)`: a 12x12 round badge (disc, octagon or cog) with a
+  division, an emblem and sometimes a metal rim, for groups. 57,600 badges:
+  4 backgrounds, 6 fields, 5 second fields, 2 metals, 3 shapes, with or
+  without a rim, 5 divisions and 8 emblems.
 
 The face counts are upper bounds: where no part uses the accent color, two
 faces that differ only in their accent look the same.
@@ -82,11 +88,11 @@ An image is `side * cell_px + 2 * margin_px` pixels wide and high, at most
 
 The seed goes through BLAKE3 in derive-key mode, with one context string per
 generator: `gsichtl 2026-10-02 face v1`, `gsichtl 2026-10-02 monster v1`,
-`gsichtl 2026-10-02 nerd v1` and `gsichtl 2026-10-02 crest v1`. The extendable
-output is the stream of draws: each draw takes 4 bytes, modulo the number of
-choices. The parts are small character grids, painted in a fixed order. Eyes,
-brows and mouths are clipped to the painted body, so they never leave the
-silhouette.
+`gsichtl 2026-10-02 nerd v1`, `gsichtl 2026-10-02 crest v1` and
+`gsichtl 2026-10-03 badge v1`. The extendable output is the stream of draws:
+each draw takes 4 bytes, modulo the number of choices. The parts are small
+character grids, painted in a fixed order. Eyes, brows and mouths are clipped
+to the painted body, so they never leave the silhouette.
 
 BLAKE3 serves as a deterministic mixer here, not for security. Its output is
 fixed by its specification, so updating the `blake3` crate does not change a
@@ -98,13 +104,14 @@ picture.
 cargo run --example render --features png -- <dir> [count]
 ```
 
-writes `face-NN.png` from the seed `user-N` and `crest-NN.png` from the seed
-`community-N` into `<dir>`, with 16 px cells and an 8 px margin. The sheets
-above are montages of 32 of each:
+writes `face-NN.png` from the seed `user-N`, and `crest-NN.png` and
+`badge-NN.png` from the seed `community-N` into `<dir>`, with 16 px cells and
+an 8 px margin. The sheets above are montages of 32 of each:
 
 ```sh
 magick montage <dir>/face-*.png  -tile 8x -geometry +4+4 -background none docs/faces.png
 magick montage <dir>/crest-*.png -tile 8x -geometry +4+4 -background none docs/crests.png
+magick montage <dir>/badge-*.png -tile 8x -geometry +4+4 -background none docs/badges.png
 ```
 
 ## Stability

@@ -1,7 +1,9 @@
 //! Deterministic pixel-art avatars from any seed.
 //!
 //! [`monster`] and [`nerd`] draw 8x8 faces, [`face`] picks one of the two by
-//! the seed, and [`crest`] draws a 10x10 shield with a division and an emblem.
+//! the seed, [`crest`] draws a 10x10 shield with a division and an emblem,
+//! and [`badge`] a 12x12 round badge with a division, an emblem and sometimes
+//! a rim.
 //! The seed is any byte string, typically a public user or group id.
 //!
 //! ```
@@ -25,6 +27,7 @@
 
 #![forbid(unsafe_code)]
 
+mod badge;
 mod crest;
 mod draws;
 mod grid;
@@ -44,6 +47,7 @@ pub enum Kind {
     Monster,
     Nerd,
     Crest,
+    Badge,
 }
 
 /// A square grid of colored cells on a background.
@@ -90,6 +94,11 @@ pub fn nerd(seed: &[u8]) -> Avatar {
 /// A 10x10 crest, for groups.
 pub fn crest(seed: &[u8]) -> Avatar {
     crest::build(crest::draw(&mut Draws::new(crest::CONTEXT, seed)))
+}
+
+/// A 12x12 round badge, for groups.
+pub fn badge(seed: &[u8]) -> Avatar {
+    badge::build(badge::draw(&mut Draws::new(badge::CONTEXT, seed)))
 }
 
 impl Avatar {

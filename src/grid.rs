@@ -162,5 +162,6 @@ mod tests {
         check("monster", crate::monster::SIDE, crate::monster::PARTS);
         check("nerd", crate::nerd::SIDE, crate::nerd::PARTS);
         check("crest", crate::crest::SIDE, crate::crest::PARTS);
+        check("badge", crate::badge::SIDE, crate::badge::PARTS);
     }
 }

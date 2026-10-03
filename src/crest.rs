@@ -7,7 +7,7 @@ use crate::{Avatar, Kind, Rgb};
 pub(crate) const CONTEXT: &str = "gsichtl 2026-10-02 crest v1";
 pub(crate) const SIDE: u8 = 10;
 
-const FIELDS: [Rgb; 6] = [
+pub(crate) const FIELDS: [Rgb; 6] = [
     hex(0xc92a2a),
     hex(0x1864ab),
     hex(0x2b8a3e),
@@ -15,7 +15,7 @@ const FIELDS: [Rgb; 6] = [
     hex(0xd9572b),
     hex(0x0c8599),
 ];
-const METALS: [Rgb; 2] = [hex(0xffd43b), hex(0xf1f3f5)];
+pub(crate) const METALS: [Rgb; 2] = [hex(0xffd43b), hex(0xf1f3f5)];
 
 const FULL: &str = "##########";
 
@@ -118,7 +118,7 @@ const DIVISIONS: [Layer; 5] = [
     ),
 ];
 
-const EMBLEMS: [Layer; 8] = [
+pub(crate) const EMBLEMS: [Layer; 8] = [
     // star
     Layer::at(
         2,
