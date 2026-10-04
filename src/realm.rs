@@ -4,9 +4,9 @@
 //!
 //! Realms reuse the shared inks with their own colors: body (`#`) is the
 //! biome's ground, the grass or the top; dark (`d`) its soil; pupil (`p`)
-//! its stone; frame (`g`) its flora; field2 (`t`) its liquid. Hair (`h`) is
-//! wood, white (`w`) is white, metal (`e`) is a warm glow, and accent (`a`)
-//! is the realm's accent.
+//! its stone and the shadow on the right; frame (`g`) its flora; field2
+//! (`t`) its liquid. Hair (`h`) is wood, white (`w`) is white, metal (`e`)
+//! is a warm glow, and accent (`a`) is the realm's accent.
 
 use crate::draws::Draws;
 use crate::grid::{ACCENTS, BACKGROUNDS, Canvas, Ink, Layer, WHITE, hex};
@@ -94,36 +94,40 @@ const LANDMARKS: usize = 5;
 /// Sky details per shape, the first of them empty.
 const DETAILS: usize = 4;
 
-// A grassy top over a hanging clod of earth with roots.
-const ISLAND: Layer = Layer::new(
-    11,
+// A grassy top dripping over a clod of earth, shaded on its right, with roots.
+const ISLAND: Layer = Layer::at(
+    10,
+    1,
     &[
-        "...##############...",
-        "..################..",
-        "..dddddddddddddddd..",
-        "...ddddddddddddddd..",
-        "...hdddpdddddddd....",
-        "....hddddddpddd.....",
-        "....h.dddpdddd......",
-        ".......dpddddh......",
-        ".........ppd.h......",
+        "...############...",
+        ".################.",
+        "##################",
+        "#d###dd####d###d#p",
+        ".dd#ddddd#dddd#dpp",
+        ".dddddddddddddddpp",
+        "..ddppddddddpdppp.",
+        "...ddddddppdpppp..",
+        "....hdddddddpph...",
+        "....h...ddpp..h...",
     ],
     false,
 );
 
-// The island's clod with a pool of water instead of grass.
-const FLOE: Layer = Layer::new(
-    11,
+// The island's clod with a pool of water in a rim of ground.
+const FLOE: Layer = Layer::at(
+    10,
+    1,
     &[
-        "..#ttttttttttttttt#.",
-        "..#ttttttttttttttt#.",
-        "..dddddddddddddddd..",
-        "...ddddddddddddddd..",
-        "...hdddpdddddddd....",
-        "....hddddddpddd.....",
-        "....h.dddpdddd......",
-        ".......dpddddh......",
-        ".........ppd.h......",
+        "...#tttttttttt#...",
+        ".#tttttttttttttt#.",
+        "#ttwwttttttttwwtt#",
+        "#d###dd####d###d#p",
+        ".dd#ddddd#dddd#dpp",
+        ".dddddddddddddddpp",
+        "..ddppddddddpdppp.",
+        "...ddddddppdpppp..",
+        "....hdddddddpph...",
+        "....h...ddpp..h...",
     ],
     false,
 );
@@ -152,9 +156,9 @@ const PLANET: Layer = Layer::at(
 // Spills from the top's right edge; island and floe.
 const WATERFALL: Layer = Layer::at(
     11,
-    14,
+    16,
     &[
-        "ttt...", "...tt.", "....t.", "....t.", "....t.", "....t.", "....t.", "....t.", "...w.w",
+        "tt..", "ttt.", "..t.", "..t.", "..t.", "..t.", "..t.", "..t.", ".w.w",
     ],
     false,
 );
@@ -173,35 +177,38 @@ const RING: Layer = Layer::new(
 const GROUND_LANDMARKS: [Layer; LANDMARKS] = [
     // tree
     Layer::at(
-        2,
-        5,
+        1,
+        4,
         &[
-            "...ggg....",
-            "..ggggggg.",
-            ".gggagggg.",
-            "ggggggggag",
-            "gaggggggg.",
-            ".ggggggg..",
-            "...ghhg...",
-            "....hh....",
-            "....hh....",
+            "....ggg......",
+            "..gggggag....",
+            ".ggaggggggg..",
+            "gggggggggagg.",
+            "ggggggggggggg",
+            ".gaggggggggg.",
+            "..gggghggag..",
+            "....ghhg.....",
+            ".....hh......",
+            ".....hhp.....",
+            "....hhhpp....",
         ],
         false,
     ),
     // hut
     Layer::at(
         2,
-        5,
+        4,
         &[
-            ".......p..",
-            "...aaaap..",
-            "..aaaaaaa.",
-            ".aaaaaaaaa",
-            "aaaaaaaaaa",
-            ".hhhhhhhh.",
-            ".heehhpph.",
-            ".hhhhhpph.",
-            ".hhhhhpph.",
+            "........pp...",
+            "...aaaaapp...",
+            "..aaaaaaaaa..",
+            ".aaaaaaaaaaa.",
+            "aaaaaaaaaaaaa",
+            ".hhhhhhhhhpp.",
+            ".heehhhhhhpp.",
+            ".heehhppphpp.",
+            ".hhhhhppphpp.",
+            ".hhhhhppphpp.",
         ],
         false,
     ),
@@ -210,41 +217,44 @@ const GROUND_LANDMARKS: [Layer; LANDMARKS] = [
         1,
         6,
         &[
-            "...h....", "...haa..", "...haaa.", "...h....", ".p.pp.p.", ".pppppp.", ".ppeppp.",
-            ".pppppp.", ".pppppp.", ".pphhpp.",
+            "...a....", "..aaa...", ".aaaaa..", "aaaaaaa.", ".ddddpp.", ".ddeedp.", ".ddeedp.",
+            ".ddddpp.", ".ddddpp.", ".dpppdp.", "ddpppddp",
         ],
         false,
     ),
     // windmill
     Layer::at(
         1,
-        4,
+        6,
         &[
-            "w.......w...",
-            "ww.....ww...",
-            ".ww...ww....",
-            "..wwhww.....",
-            "...aah......",
-            "..wwaaww....",
-            ".ww.hh.ww...",
-            "ww..hh..ww..",
-            "w..hhhh..w..",
-            "...hhhh.....",
+            "ww.....ww",
+            ".ww...ww.",
+            "..whhhw..",
+            "...hah...",
+            "..whhhw..",
+            ".ww.h.ww.",
+            "ww.hhp.ww",
+            "...hhp...",
+            "..hhhpp..",
+            "..heehp..",
+            "..hhhpp..",
         ],
         false,
     ),
     // tent
     Layer::at(
-        4,
-        4,
+        3,
+        1,
         &[
-            "....h.......",
-            "....haa.....",
-            "....h.......",
-            "...aaa......",
-            "..aaaaa.....",
-            ".aaapaaa.e..",
-            "aaapppaa.ee.",
+            "......h.........",
+            "......haa.......",
+            "......h.........",
+            ".....aaa........",
+            "....aaaaa.......",
+            "...aaaapaa......",
+            "..aaaapppaa...e.",
+            ".aaaaapppaaa.eee",
+            "aaaaaapppaaa.hph",
         ],
         false,
     ),
@@ -253,78 +263,81 @@ const GROUND_LANDMARKS: [Layer; LANDMARKS] = [
 const SEA_LANDMARKS: [Layer; LANDMARKS] = [
     // ship
     Layer::at(
-        1,
-        4,
+        0,
+        3,
         &[
-            ".....h......",
-            ".....haa....",
-            ".....h......",
-            "....wh......",
-            "...wwhw.....",
-            "..wwwhww....",
-            ".wwwwhwww...",
-            ".....h......",
-            "hhhhhhhhhhhh",
-            ".hhahhahhhh.",
-            "..hhhhhhhh..",
+            "......h.......",
+            "......haa.....",
+            "......h.......",
+            ".....wh.......",
+            "....wwhw......",
+            "...wwwhww.....",
+            "..wwwwhwww....",
+            ".wwwwwhwwww...",
+            "......h.......",
+            "hhhhhhhhhhhhp.",
+            ".hhahhahhhpp..",
+            ".tthhhhhhhpptt",
         ],
         false,
     ),
     // lighthouse
     Layer::at(
-        1,
+        0,
         6,
         &[
-            "...pp...", "..peep..", "..wwww..", "...aa...", "...ww...", "...aa...", "..wwww..",
-            "..aaaa..", "..wwww..", ".pppppp.", "pppppppp",
+            "...pp...", "..pppp..", "..weew..", "..pppp..", "...wa...", "...aa...", "..wwwa..",
+            "..aaaa..", "..wwwa..", "..aaaa..", ".dpppppp", "ddpppppp",
         ],
         false,
     ),
     // serpent
     Layer::at(
-        4,
-        3,
+        5,
+        2,
         &[
-            "...........ggg",
-            "..........gpgg",
-            "...a..a....gaa",
-            "..ggg.ggg..g..",
-            ".gg.ggg.gg.g..",
-            ".g...g...ggg..",
-            "tg..tgt..tg...",
+            ".............gg..",
+            "............gggp.",
+            "............gwgaa",
+            "..ggg.......gg...",
+            ".gg.gg...ggg.gg..",
+            "gg...gg.gg.gg.g..",
+            "ww...ww.ww..wwg..",
+            ".............w...",
         ],
         false,
     ),
     // palm
     Layer::at(
-        2,
-        5,
+        1,
+        4,
         &[
-            ".ggg.ggg..",
-            "gg.ggg.gg.",
-            "g..aha..g.",
-            "....h.....",
-            "....h.....",
-            ".....h....",
-            ".....h....",
-            "...#####..",
-            ".#########",
+            "..ggg..ggg..",
+            ".gg.gggg.gg.",
+            "g...gggg...g",
+            "....gaah....",
+            ".....ah.....",
+            ".....h......",
+            "......h.....",
+            "......h.....",
+            "..#####hd...",
+            ".#######dd..",
         ],
         false,
     ),
-    // duck
+    // whale
     Layer::at(
         4,
-        5,
+        3,
         &[
-            "...aaa....",
-            "..aaaaa...",
-            "..aapaaee.",
-            "..aaaaa...",
-            "a..aaa....",
-            "aaaaaaaa..",
-            "aaaaaaaa..",
-            ".aaaaaa...",
+            "....w.w........",
+            ".....w.........",
+            "....aaaa.......",
+            "..aaaaaaaa..a.a",
+            ".apaaaaaaaa.aaa",
+            ".aaaaaaaaaaaa..",
+            ".awwwwaaaaaa...",
+            "ttwwwwwwwttt...",
         ],
         false,
     ),
@@ -383,11 +396,22 @@ const SKY_DETAILS: [Layer; DETAILS] = [
     // none
     Layer::new(0, &[], false),
     // cloud
-    Layer::at(0, 14, &["..ww..", ".wwww.", "wwwwww"], false),
+    Layer::at(0, 11, &["...www..", ".wwwwww.", "wwwwwwww"], false),
     // birds
-    Layer::new(1, &["w.w....", ".w..w.w", ".....w."], false),
+    Layer::new(
+        1,
+        &["ww.ww.....", "..w.......", ".......w.w", "........w."],
+        false,
+    ),
     // sun
-    Layer::at(0, 16, &[".ee.", "eeee", "eeee", ".ee."], false),
+    Layer::at(
+        0,
+        13,
+        &[
+            "e.....e", "..eee..", ".eeeee.", ".eeeee.", ".eeeee.", "..eee..", "e.....e",
+        ],
+        false,
+    ),
 ];
 
 const SPACE_DETAILS: [Layer; DETAILS] = [

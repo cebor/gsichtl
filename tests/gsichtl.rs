@@ -39,7 +39,7 @@ fn seeds_keep_their_pictures() {
         "956b990ab687f4e2ded29257750684fcf231b02a62129ed66b6545bbe44acba9",
         "827dedecc3ed64dd12ca01093fd71c82b6d729bc2ad8c17e0438d6d8a8f4fd82",
         "6e102996abb9e7d69185a771ea78b46092713babad531289e64c29febb1e7bd4",
-        "93d6a6c676b569e2e1cf9c677f8096f41b56cb7d63e028a3f6facb391fc0f1ad",
+        "6b22d674dbc3ee4b5438ce7c3543cd04d531a4a6143f081fbf5f4a7420515c77",
         "0bc86f28b5b9909abb0f000a871953b2cd68e3f3d44ff1b4ee8a3949b7b77cde",
         "e444dc102577ec0713cf8bf1e2c787e35ad3e323964f05cf7c86a4db9dd52af5",
         "16f5370130d7c99666b42fbd9ed28f50f9a116ba87651b277a4baa39c31f0e1f",
@@ -47,7 +47,7 @@ fn seeds_keep_their_pictures() {
         "b08567a921a7b9a0b678ad211f9f2bab81d701ba0e63efa168131a4caa3f6988",
         "b75358fe3b1d364ab8728aa1cdd10d8bb018ae2f09a0b39e36885426a9269852",
         "d3b8fde956308b3b49050534a0cbcdeeb5fed017ade9af05f7d9be5efbfbe70a",
-        "c67b32f2a12ab813537c7df9582c8b70a32cffa8692744a928dd314b49c60352",
+        "090464bdca5a8559cc5482df5783422278108a96975eddddc6ca7dfecdb72e4b",
     ];
     assert_eq!(got, want);
 }
