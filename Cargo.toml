@@ -9,7 +9,7 @@ homepage = "https://cebor.github.io/gsichtl/"
 repository = "https://github.com/cebor/gsichtl"
 keywords = ["avatar", "pixel-art", "identicon", "generator"]
 categories = ["graphics", "multimedia::images"]
-exclude = ["/web", "/PRODUCT.md", "/DESIGN.md", "/.impeccable"]
+exclude = ["/web", "/AGENTS.md", "/PRODUCT.md", "/DESIGN.md", "/.impeccable"]
 
 [features]
 png = ["dep:png"]
