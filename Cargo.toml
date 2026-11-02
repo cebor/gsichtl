@@ -8,6 +8,7 @@ description = "Deterministic pixel-art avatars from any seed: monsters, nerdy fa
 repository = "https://github.com/cebor/gsichtl"
 keywords = ["avatar", "pixel-art", "identicon", "generator"]
 categories = ["graphics", "multimedia::images"]
+exclude = ["/web", "/PRODUCT.md", "/DESIGN.md", "/.impeccable"]
 
 [features]
 png = ["dep:png"]

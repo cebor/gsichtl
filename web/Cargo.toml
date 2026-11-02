@@ -1,0 +1,24 @@
+[package]
+name = "gsichtl-web"
+version = "0.0.0"
+edition = "2024"
+rust-version = "1.91"
+license = "MIT"
+publish = false
+description = "Runs gsichtl in the browser for the playground on GitHub Pages"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+gsichtl = { path = ".." }
+# Pinned exactly: wasm-bindgen-cli in web/build.sh and pages.yml must be this version.
+wasm-bindgen = "=0.2.130"
+
+[profile.release]
+opt-level = "s"
+lto = true
+codegen-units = 1
+
+# Not a member of the gsichtl package's build; keeps the crate's Cargo.lock free of wasm-bindgen.
+[workspace]

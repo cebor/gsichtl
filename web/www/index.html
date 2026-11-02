@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>gsichtl: deterministic pixel-art avatars</title>
+<meta name="description" content="Deterministic pixel-art avatars from any seed.">
+<link rel="stylesheet" href="style.css">
+<script type="module" src="app.js"></script>
+</head>
+<body>
+<header class="band">
+  <div class="band-inner">
+    <div class="band-title">
+      <h1>gsichtl</h1>
+      <p class="version" id="version" hidden></p>
+    </div>
+    <p class="tagline">Deterministic pixel-art avatars from any seed.</p>
+    <nav class="links" aria-label="Project">
+      <a href="https://github.com/cebor/gsichtl">GitHub</a>
+      <a href="https://docs.rs/gsichtl">docs.rs</a>
+      <a href="https://crates.io/crates/gsichtl">crates.io</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="playground" aria-label="Playground">
+    <p class="status" id="status" role="status">Loading the generators…</p>
+    <div id="work" hidden>
+    <div class="seed-row">
+      <label class="seed-label" for="seed">Seed</label>
+      <input id="seed" class="seed" type="text" value="alice" autocomplete="off" spellcheck="false">
+    </div>
+
+    <div class="work">
+      <div class="parts">
+        <section class="group" aria-labelledby="group-users">
+          <h2 class="group-title" id="group-users">Users</h2>
+          <div class="tiles" id="tiles-users"></div>
+        </section>
+        <section class="group" aria-labelledby="group-groups">
+          <h2 class="group-title" id="group-groups">Groups</h2>
+          <div class="tiles" id="tiles-groups"></div>
+        </section>
+      </div>
+
+      <section class="detail" aria-labelledby="detail-name">
+        <h2 class="detail-name"><code id="detail-name">face</code><span class="detail-kind" id="detail-kind"></span></h2>
+        <div class="ballmap" id="ballmap">
+          <div class="ruler ruler-cols" id="ruler-cols" aria-hidden="true"></div>
+          <div class="ruler ruler-rows" id="ruler-rows" aria-hidden="true"></div>
+          <div class="plate" id="plate">
+            <canvas id="detail-canvas"></canvas>
+            <p class="render-error" id="detail-error" hidden></p>
+          </div>
+        </div>
+        <p class="equation"><span id="equation"></span><span class="size" id="size-label"></span></p>
+
+        <table class="conditions">
+          <caption>Render options</caption>
+          <thead>
+            <tr><th scope="col">Parameter</th><th scope="col" class="num">Min</th><th scope="col">Value</th><th scope="col" class="num">Max</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row"><label for="cell">Cell</label></th>
+              <td class="num">1</td>
+              <td><div class="value">
+                <input id="cell-range" type="range" min="1" max="32" step="1" aria-hidden="true" tabindex="-1">
+                <span class="field"><input id="cell" type="number" min="1" max="32" step="1" inputmode="numeric"><span class="unit">px</span></span>
+              </div></td>
+              <td class="num">32</td>
+            </tr>
+            <tr>
+              <th scope="row"><label for="margin">Margin</label></th>
+              <td class="num">0</td>
+              <td><div class="value">
+                <input id="margin-range" type="range" min="0" max="32" step="1" aria-hidden="true" tabindex="-1">
+                <span class="field"><input id="margin" type="number" min="0" max="32" step="1" inputmode="numeric"><span class="unit">px</span></span>
+              </div></td>
+              <td class="num">32</td>
+            </tr>
+            <tr>
+              <th scope="row">Background</th>
+              <td></td>
+              <td><label class="check"><input id="transparent" type="checkbox"> Transparent background</label></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="code-block">
+          <div class="code-head"><span>Rust</span><button type="button" class="copy" data-copy="snippet">Copy</button></div>
+          <pre><code id="snippet"></code></pre>
+        </div>
+        <button type="button" class="primary" id="download">Download PNG</button>
+      </section>
+    </div>
+    </div>
+  </section>
+
+  <section class="install" aria-labelledby="install-title">
+    <h2 id="install-title">Install</h2>
+    <div class="code-block">
+      <div class="code-head"><span id="install-label">Shell</span><button type="button" class="copy" data-copy="install">Copy</button></div>
+      <pre><code id="install">cargo add gsichtl --features png</code></pre>
+    </div>
+  </section>
+</main>
+</body>
+</html>

@@ -1,0 +1,626 @@
+/* Archivo, SIL Open Font License 1.1: fonts/OFL.txt. */
+@font-face {
+  font-family: "Archivo";
+  src: url("fonts/archivo-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Archivo";
+  src: url("fonts/archivo-700.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --red: #c8102e;
+  --red-deep: #a00c24;
+  --paper: #f7f6f2;
+  --sheet: #fdfdfb;
+  --ink: #16181b;
+  --ink-soft: #4a4e54;
+  --rule: #cfcdc5;
+  --code: #ecebe5;
+  --checker: #e3e1da;
+  --sans: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  --gap: 1.5rem;
+  color-scheme: light;
+  scrollbar-color: var(--ink-soft) var(--paper);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 400 1rem/1.5 var(--sans);
+  font-variant-numeric: tabular-nums;
+  caret-color: var(--red);
+}
+
+::selection {
+  background: var(--red);
+  color: #fff;
+}
+
+a {
+  color: inherit;
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1px;
+}
+
+code,
+pre,
+input[type="text"],
+input[type="number"] {
+  font-family: var(--mono);
+}
+
+canvas {
+  image-rendering: pixelated;
+  display: block;
+}
+
+:focus-visible {
+  outline: 2px solid var(--red);
+  outline-offset: 2px;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+/* Part-number band */
+
+.band {
+  background: var(--red);
+  color: #fff;
+}
+
+.band ::selection {
+  background: #fff;
+  color: var(--red);
+}
+
+.band :focus-visible {
+  outline-color: #fff;
+}
+
+.band-inner {
+  max-width: 82rem;
+  margin: 0 auto;
+  padding: 1.25rem var(--gap) 1.1rem;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: baseline;
+  column-gap: 2rem;
+  row-gap: 0.25rem;
+}
+
+.band-title {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+}
+
+.band h1 {
+  margin: 0;
+  font-size: 2.75rem;
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.version {
+  margin: 0;
+  font: 700 1rem/1 var(--mono);
+}
+
+.tagline {
+  margin: 0;
+  font-size: 1.125rem;
+}
+
+.links {
+  display: flex;
+  gap: 1.25rem;
+  font-weight: 700;
+}
+
+/* Page */
+
+main {
+  max-width: 82rem;
+  margin: 0 auto;
+  padding: 1.5rem var(--gap) 3rem;
+}
+
+.status {
+  margin: 0 0 0.75rem;
+  color: var(--ink-soft);
+  font-size: 0.875rem;
+}
+
+.status.is-error {
+  color: var(--red);
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.seed-row {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  border-top: 2px solid var(--ink);
+  border-bottom: 1px solid var(--rule);
+  background: var(--sheet);
+}
+
+.seed-label {
+  padding: 0 1.25rem;
+  font-weight: 700;
+  font-size: 1.125rem;
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  border-right: 1px solid var(--rule);
+}
+
+.seed {
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  font-size: 1.75rem;
+  padding: 0.6rem 1.25rem;
+}
+
+.seed:focus-visible {
+  outline-offset: -2px;
+}
+
+.work {
+  margin-top: 1.75rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(22rem, 1fr);
+  gap: 2.5rem;
+  align-items: start;
+}
+
+/* Parts table */
+
+.group + .group {
+  margin-top: 1.5rem;
+}
+
+.group-title,
+.detail-name,
+.install h2 {
+  margin: 0;
+  padding: 0.45rem 0;
+  border-top: 2px solid var(--ink);
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.tiles {
+  display: grid;
+  grid-template-columns: repeat(var(--columns), minmax(0, 1fr));
+  gap: 1px;
+  padding: 1px;
+}
+
+#tiles-users {
+  --columns: 4;
+}
+
+#tiles-groups {
+  --columns: 5;
+}
+
+.tile {
+  appearance: none;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  background: var(--sheet);
+  color: var(--ink);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  outline: 1px solid var(--rule);
+}
+
+.tile:hover {
+  background: #fff;
+}
+
+.tile:focus-visible {
+  outline-offset: -2px;
+  position: relative;
+  z-index: 1;
+}
+
+.tile-frame {
+  height: 7.5rem;
+  display: grid;
+  place-items: center;
+  padding: 0.5rem;
+}
+
+.tile-plate {
+  display: flex;
+  flex-direction: column;
+  padding: 0.4rem 0.6rem 0.5rem;
+  border-top: 1px solid var(--rule);
+}
+
+.tile-name {
+  font-weight: 700;
+  font-size: 0.9375rem;
+  overflow-wrap: anywhere;
+}
+
+.tile-kind {
+  font-weight: 400;
+}
+
+.tile-meta {
+  font-size: 0.8125rem;
+  color: var(--ink-soft);
+}
+
+.tile[aria-pressed="true"] {
+  box-shadow: inset 0 0 0 2px var(--red);
+}
+
+.tile[aria-pressed="true"] .tile-plate {
+  background: var(--red);
+  border-top-color: var(--red);
+  color: #fff;
+}
+
+.tile[aria-pressed="true"] .tile-meta {
+  color: #fff;
+}
+
+.render-error {
+  margin: 0;
+  color: var(--red);
+  font-size: 0.8125rem;
+  font-weight: 700;
+}
+
+/* Detail */
+
+.detail {
+  scroll-margin-top: 1rem;
+}
+
+.detail-name code {
+  font-size: 1.5rem;
+}
+
+.detail-kind {
+  font-family: var(--mono);
+  font-weight: 400;
+  font-size: 1.5rem;
+}
+
+.ballmap {
+  --plate: 0px;
+  --cell: 16px;
+  --margin: 8px;
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: 1.5rem var(--plate);
+  grid-template-rows: 1.25rem var(--plate);
+  font: 400 min(0.6875rem, calc(var(--cell) - 2px))/1 var(--mono);
+  color: var(--ink-soft);
+}
+
+.ruler {
+  display: flex;
+}
+
+.ruler span {
+  flex: 0 0 var(--cell);
+  display: grid;
+  place-items: center;
+  white-space: nowrap;
+}
+
+.ruler-cols {
+  grid-area: 1 / 2;
+  padding-left: var(--margin);
+  border-bottom: 1px solid var(--ink);
+}
+
+.ruler-rows {
+  grid-area: 2 / 1;
+  flex-direction: column;
+  padding-top: var(--margin);
+  border-right: 1px solid var(--ink);
+}
+
+.ballmap.is-dense .ruler span,
+.ballmap.is-sparse .ruler-cols span:nth-child(even) {
+  visibility: hidden;
+}
+
+.plate {
+  grid-area: 2 / 2;
+  outline: 1px solid var(--ink);
+}
+
+.ballmap.is-transparent .plate {
+  /* The transparency checker: tells transparent pixels from paper-coloured ones. */
+  background: conic-gradient(var(--checker) 25%, var(--sheet) 0 50%, var(--checker) 0 75%, var(--sheet) 0) 0 0 / 16px 16px;
+}
+
+.equation {
+  margin: 0.75rem 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.25rem 1rem;
+  font-family: var(--mono);
+  font-size: 0.875rem;
+}
+
+.size {
+  font-weight: 700;
+}
+
+.conditions {
+  margin-top: 1.5rem;
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-size: 0.9375rem;
+}
+
+.conditions caption {
+  text-align: left;
+  font-weight: 700;
+  padding: 0.45rem 0;
+  border-top: 2px solid var(--ink);
+}
+
+.conditions th,
+.conditions td {
+  padding: 0.45rem 0.5rem;
+  border-bottom: 1px solid var(--rule);
+  text-align: left;
+  vertical-align: middle;
+}
+
+.conditions th:first-child,
+.conditions td:first-child {
+  padding-left: 0;
+}
+
+.conditions thead th:first-child {
+  width: 6.5rem;
+}
+
+.conditions thead th {
+  font-size: 0.8125rem;
+  color: var(--ink-soft);
+  font-weight: 700;
+  border-bottom-color: var(--ink);
+}
+
+.conditions .num {
+  text-align: right;
+  width: 2.5rem;
+  font-family: var(--mono);
+}
+
+.value {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+input[type="range"] {
+  flex: 1;
+  min-width: 4rem;
+  accent-color: var(--red);
+}
+
+.field {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--ink-soft);
+  background: var(--sheet);
+}
+
+.field:focus-within {
+  outline: 2px solid var(--red);
+  outline-offset: 1px;
+}
+
+.field input {
+  width: 3.25rem;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  font-size: 0.9375rem;
+  padding: 0.25rem 0.4rem;
+  text-align: right;
+}
+
+.field input:focus-visible {
+  outline: none;
+}
+
+.field input[aria-invalid="true"] {
+  color: var(--red);
+  text-decoration: underline wavy;
+}
+
+.unit {
+  padding-right: 0.45rem;
+  color: var(--ink-soft);
+  font-family: var(--mono);
+  font-size: 0.8125rem;
+}
+
+.check {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.check input {
+  width: 1.05rem;
+  height: 1.05rem;
+  margin: 0;
+  accent-color: var(--red);
+}
+
+/* Code */
+
+.code-block {
+  margin-top: 1.25rem;
+  background: var(--code);
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+
+.code-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  border-bottom: 1px solid var(--rule);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--ink-soft);
+}
+
+.code-head span {
+  padding: 0.4rem 1rem;
+}
+
+.code-block pre {
+  margin: 0;
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+button.copy,
+button.primary {
+  appearance: none;
+  font: 700 0.875rem/1 var(--sans);
+  cursor: pointer;
+  border-radius: 0;
+}
+
+button.copy {
+  min-width: 6.5rem;
+  border: 0;
+  border-left: 1px solid var(--rule);
+  background: transparent;
+  color: var(--red);
+  padding: 0.4rem 1rem;
+}
+
+button.copy:hover {
+  background: var(--sheet);
+}
+
+button.copy:focus-visible {
+  outline-offset: -2px;
+}
+
+button.primary {
+  margin-top: 1.25rem;
+  width: 100%;
+  border: 0;
+  background: var(--red);
+  color: #fff;
+  padding: 0.9rem 1rem;
+  font-size: 1rem;
+}
+
+button.primary:hover {
+  background: var(--red-deep);
+}
+
+button.primary:focus-visible {
+  outline-color: var(--ink);
+}
+
+/* Install */
+
+.install {
+  margin-top: 3.5rem;
+}
+
+.install .code-block {
+  margin-top: 0;
+}
+
+.install pre {
+  font-size: 1rem;
+  padding: 1rem;
+}
+
+@media (max-width: 66rem) {
+  .band-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .links {
+    margin-top: 0.5rem;
+  }
+
+  .work {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 30rem) {
+  :root {
+    --gap: 1rem;
+  }
+
+  .band h1 {
+    font-size: 2.25rem;
+  }
+
+  .seed {
+    font-size: 1.375rem;
+  }
+
+  #tiles-users,
+  #tiles-groups {
+    --columns: 3;
+  }
+
+  .tile-frame {
+    padding: 0.25rem;
+  }
+
+  .tile-kind,
+  .tile-meta {
+    white-space: nowrap;
+  }
+}
