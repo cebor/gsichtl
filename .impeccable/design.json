@@ -1,0 +1,369 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-02T10:27:54Z",
+  "title": "Design System: gsichtl playground",
+  "extensions": {
+    "colorMeta": {
+      "band-red": {
+        "role": "primary",
+        "displayName": "Band Red",
+        "canonical": "#c8102e",
+        "oklch": "oklch(53% 0.207 22)",
+        "tonalRamp": [
+          "#2c0000",
+          "#590000",
+          "#8a0013",
+          "#bd112c",
+          "#e54c52",
+          "#ff7f7e",
+          "#ffa8a4",
+          "#ffcfcb"
+        ]
+      },
+      "band-red-deep": {
+        "role": "primary",
+        "displayName": "Band Red Deep",
+        "canonical": "#a00c24",
+        "oklch": "oklch(45% 0.175 22)",
+        "tonalRamp": [
+          "#280000",
+          "#530007",
+          "#81111e",
+          "#b22f37",
+          "#d95a5c",
+          "#f88986",
+          "#ffafab",
+          "#ffd5d1"
+        ]
+      },
+      "coated-paper": {
+        "role": "neutral",
+        "displayName": "Coated Paper",
+        "canonical": "#f7f6f2",
+        "oklch": "oklch(97% 0.005 95)",
+        "tonalRamp": [
+          "#0c0b0a",
+          "#272625",
+          "#454543",
+          "#666664",
+          "#8a8987",
+          "#aeaeac",
+          "#cececb",
+          "#efeeec"
+        ]
+      },
+      "sheet-white": {
+        "role": "neutral",
+        "displayName": "Sheet White",
+        "canonical": "#fdfdfb",
+        "oklch": "oklch(99% 0.003 106)",
+        "tonalRamp": [
+          "#0b0b0a",
+          "#262626",
+          "#454544",
+          "#666665",
+          "#898988",
+          "#aeaead",
+          "#cececc",
+          "#eeeeed"
+        ]
+      },
+      "white": {
+        "role": "neutral",
+        "displayName": "White",
+        "canonical": "#ffffff",
+        "oklch": "oklch(100% 0.000 90)",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#262626",
+          "#454545",
+          "#666666",
+          "#898989",
+          "#aeaeae",
+          "#cecece",
+          "#eeeeee"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "#16181b",
+        "oklch": "oklch(21% 0.007 258)",
+        "tonalRamp": [
+          "#0a0b0d",
+          "#252628",
+          "#444547",
+          "#656668",
+          "#88898c",
+          "#acaeb0",
+          "#ccced0",
+          "#edeef1"
+        ]
+      },
+      "ink-soft": {
+        "role": "neutral",
+        "displayName": "Ink Soft",
+        "canonical": "#4a4e54",
+        "oklch": "oklch(42% 0.011 258)",
+        "tonalRamp": [
+          "#090b0e",
+          "#24272a",
+          "#434549",
+          "#64666a",
+          "#87898d",
+          "#abaeb2",
+          "#cbced2",
+          "#eceff3"
+        ]
+      },
+      "hairline": {
+        "role": "neutral",
+        "displayName": "Hairline",
+        "canonical": "#cfcdc5",
+        "oklch": "oklch(85% 0.011 95)",
+        "tonalRamp": [
+          "#0c0b08",
+          "#272623",
+          "#464541",
+          "#676662",
+          "#8a8985",
+          "#afaea9",
+          "#cfcec9",
+          "#f0eeea"
+        ]
+      },
+      "code-tint": {
+        "role": "neutral",
+        "displayName": "Code Tint",
+        "canonical": "#ecebe5",
+        "oklch": "oklch(94% 0.008 99)",
+        "tonalRamp": [
+          "#0c0b09",
+          "#272624",
+          "#464542",
+          "#676663",
+          "#8a8986",
+          "#aeaeab",
+          "#cececa",
+          "#efeeeb"
+        ]
+      },
+      "checker": {
+        "role": "neutral",
+        "displayName": "Checker",
+        "canonical": "#e3e1da",
+        "oklch": "oklch(91% 0.010 94)",
+        "tonalRamp": [
+          "#0c0b08",
+          "#272623",
+          "#464542",
+          "#676662",
+          "#8a8985",
+          "#afaeaa",
+          "#cfcec9",
+          "#f0eeea"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "part-number": {
+        "displayName": "Part Number",
+        "purpose": "The name in the band, once; the only display size."
+      },
+      "seed": {
+        "displayName": "Seed",
+        "purpose": "The text typed into the seed field."
+      },
+      "part-name": {
+        "displayName": "Part Name",
+        "purpose": "The selected generator's name in the detail heading."
+      },
+      "lede": {
+        "displayName": "Lede",
+        "purpose": "Tagline and the Seed label."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Base size for running text and the install line."
+      },
+      "heading": {
+        "displayName": "Heading",
+        "purpose": "Section rules and the primary button label."
+      },
+      "plate-name": {
+        "displayName": "Plate Name",
+        "purpose": "Generator name on a tile."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Table column headers, code block header, Copy button."
+      },
+      "measure": {
+        "displayName": "Measure",
+        "purpose": "Size equation, units and snippets."
+      },
+      "code": {
+        "displayName": "Code",
+        "purpose": "Code blocks."
+      }
+    },
+    "shadows": [
+      {
+        "name": "selection-inset",
+        "value": "inset 0 0 0 2px #c8102e",
+        "purpose": "The only shadow: the 2px inset red outline on the selected tile. Nothing is lifted."
+      }
+    ],
+    "motion": [
+      {
+        "name": "none",
+        "value": "none",
+        "purpose": "No transitions or animations; every state change is instant."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "stacked",
+        "value": "66rem",
+        "purpose": "Detail moves below the tiles; band stacks."
+      },
+      {
+        "name": "narrow",
+        "value": "30rem",
+        "purpose": "Side gap 1rem, three tiles across, smaller name and seed."
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Part-number Band",
+      "kind": "custom",
+      "refersTo": "band",
+      "description": "Full-width red band with name, version, tagline and links.",
+      "html": "<header class=\"ds-band\"><h1 class=\"ds-band-name\">gsichtl</h1><span class=\"ds-band-version\">0.5.0</span><p class=\"ds-band-tag\">Deterministic pixel-art avatars from any seed.</p><nav class=\"ds-band-links\"><a href=\"#\">GitHub</a><a href=\"#\">docs.rs</a><a href=\"#\">crates.io</a></nav></header>",
+      "css": ".ds-band{display:flex;flex-wrap:wrap;align-items:baseline;gap:.25rem 2rem;background:#c8102e;color:#fff;padding:1.25rem 1.5rem 1.1rem;font-family:Archivo,'Helvetica Neue',Arial,sans-serif;font-variant-numeric:tabular-nums}.ds-band-name{margin:0;font-size:2.75rem;line-height:1;font-weight:700;letter-spacing:-.03em}.ds-band-version{font:700 1rem/1 ui-monospace,Menlo,Consolas,monospace}.ds-band-tag{margin:0;flex:1;font-size:1.125rem}.ds-band-links{display:flex;gap:1.25rem;font-weight:700}.ds-band-links a{color:inherit;text-underline-offset:.2em;text-decoration-thickness:1px}.ds-band-links a:focus-visible{outline:2px solid #fff;outline-offset:2px}"
+    },
+    {
+      "name": "Seed Field",
+      "kind": "input",
+      "refersTo": "seed-field",
+      "description": "Full-width mono input in a ruled row with a bold label cell.",
+      "html": "<div class=\"ds-seed-row\"><label class=\"ds-seed-label\" for=\"ds-seed\">Seed</label><input id=\"ds-seed\" class=\"ds-seed\" type=\"text\" value=\"alice\" autocomplete=\"off\" spellcheck=\"false\"></div>",
+      "css": ".ds-seed-row{display:grid;grid-template-columns:auto 1fr;align-items:center;border-top:2px solid #16181b;border-bottom:1px solid #cfcdc5;background:#fdfdfb;font-family:Archivo,'Helvetica Neue',Arial,sans-serif;}.ds-seed-label{align-self:stretch;display:flex;align-items:center;padding:0 1.25rem;font-weight:700;font-size:1.125rem;color:#16181b;border-right:1px solid #cfcdc5}.ds-seed{width:100%;min-width:0;border:0;background:transparent;color:#16181b;font-size:1.75rem;padding:.6rem 1.25rem;caret-color:#c8102e;font-family:ui-monospace,'SF Mono',Menlo,Consolas,'Liberation Mono',monospace;}.ds-seed:focus-visible{outline:2px solid #c8102e;outline-offset:-2px}"
+    },
+    {
+      "name": "Tile",
+      "kind": "custom",
+      "refersTo": "tile",
+      "description": "A generator part: avatar frame above a fixed name plate.",
+      "html": "<button type=\"button\" class=\"ds-tile\" aria-pressed=\"false\"><span class=\"ds-tile-frame\"><span class=\"ds-tile-avatar\"></span></span><span class=\"ds-tile-plate\"><span class=\"ds-tile-name\">face<span class=\"ds-tile-kind\"> · nerd</span></span><span class=\"ds-tile-meta\">8 × 8 · users</span></span></button>",
+      "css": ".ds-tile{appearance:none;display:flex;flex-direction:column;width:10rem;border:0;margin:0;padding:0;background:#fdfdfb;color:#16181b;font:inherit;font-family:Archivo,'Helvetica Neue',Arial,sans-serif;text-align:left;cursor:pointer;outline:1px solid #cfcdc5}.ds-tile:hover{background:#fff}.ds-tile:focus-visible{outline:2px solid #c8102e;outline-offset:-2px;position:relative;z-index:1}.ds-tile-frame{height:7.5rem;display:grid;place-items:center;padding:.5rem}.ds-tile-avatar{width:64px;height:64px;background:#16181b;image-rendering:pixelated}.ds-tile-plate{display:flex;flex-direction:column;padding:.4rem .6rem .5rem;border-top:1px solid #cfcdc5}.ds-tile-name{font-weight:700;font-size:.9375rem}.ds-tile-kind{font-weight:400}.ds-tile-meta{font-size:.8125rem;color:#4a4e54}.ds-tile[aria-pressed=true]{box-shadow:inset 0 0 0 2px #c8102e}.ds-tile[aria-pressed=true] .ds-tile-plate{background:#c8102e;border-top-color:#c8102e;color:#fff}.ds-tile[aria-pressed=true] .ds-tile-meta{color:#fff}"
+    },
+    {
+      "name": "Tile (selected)",
+      "kind": "custom",
+      "refersTo": "tile-plate-selected",
+      "description": "The selected part: red name plate and inset red outline.",
+      "html": "<button type=\"button\" class=\"ds-tile ds-tile-on\" aria-pressed=\"true\"><span class=\"ds-tile-frame\"><span class=\"ds-tile-avatar\"></span></span><span class=\"ds-tile-plate\"><span class=\"ds-tile-name\">nerd12</span><span class=\"ds-tile-meta\">12 × 12 · users</span></span></button>",
+      "css": ".ds-tile-on{display:flex;flex-direction:column;width:10rem;border:0;margin:0;padding:0;background:#fdfdfb;color:#16181b;font-family:Archivo,'Helvetica Neue',Arial,sans-serif;text-align:left;cursor:pointer;outline:1px solid #cfcdc5;box-shadow:inset 0 0 0 2px #c8102e}.ds-tile-on:focus-visible{outline:2px solid #c8102e;outline-offset:-2px}.ds-tile-frame{height:7.5rem;display:grid;place-items:center;padding:.5rem}.ds-tile-avatar{width:64px;height:64px;background:#16181b;image-rendering:pixelated}.ds-tile-plate{display:flex;flex-direction:column;padding:.4rem .6rem .5rem;background:#c8102e;color:#fff}.ds-tile-name{font-weight:700;font-size:.9375rem}.ds-tile-meta{font-size:.8125rem;color:#fff}"
+    },
+    {
+      "name": "Number Field",
+      "kind": "input",
+      "refersTo": "number-field",
+      "description": "Mono, right-aligned number with a unit, inside a 1px frame.",
+      "html": "<span class=\"ds-field\"><input class=\"ds-field-input\" type=\"number\" value=\"16\" min=\"1\" max=\"32\" aria-label=\"Cell\"><span class=\"ds-field-unit\">px</span></span>",
+      "css": ".ds-field{display:inline-flex;align-items:center;border:1px solid #4a4e54;background:#fdfdfb;font-family:ui-monospace,'SF Mono',Menlo,Consolas,'Liberation Mono',monospace;}.ds-field:focus-within{outline:2px solid #c8102e;outline-offset:1px}.ds-field-input{width:3.25rem;border:0;background:transparent;color:#16181b;font-size:.9375rem;padding:.25rem .4rem;text-align:right;font-family:ui-monospace,'SF Mono',Menlo,Consolas,'Liberation Mono',monospace;}.ds-field-input:focus-visible{outline:none}.ds-field-unit{padding-right:.45rem;color:#4a4e54;font-size:.8125rem}"
+    },
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Full-width Download PNG; the page's one filled red action.",
+      "html": "<button type=\"button\" class=\"ds-btn-primary\">Download PNG</button>",
+      "css": ".ds-btn-primary{appearance:none;width:100%;border:0;border-radius:0;background:#c8102e;color:#fff;padding:.9rem 1rem;font:700 1rem/1 Archivo,'Helvetica Neue',Arial,sans-serif;cursor:pointer}.ds-btn-primary:hover{background:#a00c24}.ds-btn-primary:focus-visible{outline:2px solid #16181b;outline-offset:2px}"
+    },
+    {
+      "name": "Code Block",
+      "kind": "custom",
+      "refersTo": "code-block",
+      "description": "Code tint between hairlines, with a labelled header and a Copy button.",
+      "html": "<div class=\"ds-code\"><div class=\"ds-code-head\"><span>Cargo.toml</span><button type=\"button\" class=\"ds-btn-copy\">Copy</button></div><pre class=\"ds-code-pre\"><code>gsichtl = { version = \"0.5\", features = [\"png\"] }</code></pre></div>",
+      "css": ".ds-code{background:#ecebe5;border-top:1px solid #cfcdc5;border-bottom:1px solid #cfcdc5;color:#16181b}.ds-code-head{display:flex;justify-content:space-between;align-items:stretch;border-bottom:1px solid #cfcdc5;font:700 .8125rem/1.5 Archivo,'Helvetica Neue',Arial,sans-serif;color:#4a4e54}.ds-code-head span{padding:.4rem 1rem}.ds-btn-copy{appearance:none;min-width:6.5rem;border:0;border-left:1px solid #cfcdc5;border-radius:0;background:transparent;color:#c8102e;padding:.4rem 1rem;font:700 .875rem/1 Archivo,'Helvetica Neue',Arial,sans-serif;cursor:pointer}.ds-btn-copy:hover{background:#fdfdfb}.ds-btn-copy:focus-visible{outline:2px solid #c8102e;outline-offset:-2px}.ds-code-pre{margin:0;padding:1rem;font-size:1rem;white-space:pre-wrap;overflow-wrap:anywhere;font-family:ui-monospace,'SF Mono',Menlo,Consolas,'Liberation Mono',monospace;}"
+    },
+    {
+      "name": "Render Options Row",
+      "kind": "custom",
+      "refersTo": "number-field",
+      "description": "A datasheet table row: parameter, min, slider with field, max.",
+      "html": "<table class=\"ds-cond\"><caption>Render options</caption><thead><tr><th>Parameter</th><th class=\"ds-num\">Min</th><th>Value</th><th class=\"ds-num\">Max</th></tr></thead><tbody><tr><th>Cell</th><td class=\"ds-num\">1</td><td><div class=\"ds-value\"><input type=\"range\" min=\"1\" max=\"32\" value=\"16\" aria-label=\"Cell range\"><span class=\"ds-f\">16 px</span></div></td><td class=\"ds-num\">32</td></tr></tbody></table>",
+      "css": ".ds-cond{width:100%;border-collapse:collapse;table-layout:fixed;font:.9375rem/1.5 Archivo,'Helvetica Neue',Arial,sans-serif;font-variant-numeric:tabular-nums;color:#16181b}.ds-cond caption{text-align:left;font-weight:700;padding:.45rem 0;border-top:2px solid #16181b}.ds-cond th,.ds-cond td{padding:.45rem .5rem;border-bottom:1px solid #cfcdc5;text-align:left;vertical-align:middle}.ds-cond th:first-child,.ds-cond td:first-child{padding-left:0}.ds-cond thead th{font-size:.8125rem;color:#4a4e54;font-weight:700;border-bottom-color:#16181b}.ds-cond thead th:first-child{width:6.5rem}.ds-num{text-align:right;width:2.5rem;font-family:ui-monospace,Menlo,Consolas,monospace}.ds-value{display:flex;align-items:center;gap:.75rem}.ds-value input[type=range]{flex:1;min-width:4rem;accent-color:#c8102e}.ds-f{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.9375rem}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Component Datasheet",
+    "overview": "Every generator is a part with a number and a guaranteed output, and the page is its datasheet: read and tried in one place. The ground is coated paper in a warm off-white (#f7f6f2), the ink is near-black (#16181b), and one band of datasheet red carries the name and the version. Tables are ruled with hairlines, figures are tabular, the body face is a grotesk, and monospace appears only for code and measurements. The avatars are the only imagery; the system exists to hold them still and label them.\n\nThe density is that of a parts table. Thirteen tiles sit in two groups, each wearing a fixed name plate. The selected part opens as a ball-map: an avatar in a frame with lettered rows, numbered columns and a size equation. Nothing is rounded, nothing is shadowed, nothing moves. Depth is a rule weight, not a surface.\n\nIt refuses the crate-landing default: a hero headline, feature cards and a code block at the bottom. It also refuses to look decorated; an avatar is never put in a circle, a card or a gradient.",
+    "keyCharacteristics": [
+      "One red band, one ink, one paper. Red marks the band and what can be pressed, selected or is wrong.",
+      "Hairline rules in two weights carry all structure; there are no shadows and no radii.",
+      "Avatars are always drawn pixelated, on a fixed ramp of sizes, never smoothed.",
+      "Monospace is for seeds, snippets and measurements. Everything else is Archivo.",
+      "Every tile carries the same name plate: generator, grid, audience."
+    ],
+    "rules": [
+      {
+        "name": "The Press Rule",
+        "body": "Red appears on the band, on what can be pressed or is selected, and on what is wrong. Body text, rules and decoration are never red. Test: remove the band and every red thing left must respond to a click or report an error.",
+        "section": "colors"
+      },
+      {
+        "name": "The Paper Rule",
+        "body": "Surfaces are paper or sheet. No dark mode, no tinted panels, no gradients except the transparency checker.",
+        "section": "colors"
+      },
+      {
+        "name": "The Two Voices Rule",
+        "body": "Proportional type states and labels; monospace shows what the visitor types, what they copy and what is measured. A sentence is never set in monospace.",
+        "section": "typography"
+      },
+      {
+        "name": "The Two Weights Rule",
+        "body": "Weight 400 and 700 only. Hierarchy comes from size, weight and rule, never from colour or italics.",
+        "section": "typography"
+      },
+      {
+        "name": "The Ramp Rule",
+        "body": "An avatar is displayed at its native pixel size, or at a binary fraction of it (1, 1/2, 1/4, 1/8) when its column is narrower. Tiles show half size. Never at a free scale, and always `image-rendering: pixelated`. The ball-map rulers scale with it and thin out (every other label, then none) before they overlap.",
+        "section": "layout"
+      },
+      {
+        "name": "The Flat Rule",
+        "body": "No `box-shadow` except the inset selection outline. Do not lift, blur or stack surfaces.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Rule Weight Rule",
+        "body": "A section opens with 2px ink; everything inside it is separated with 1px hairline. A third weight does not exist.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** draw every avatar with `image-rendering: pixelated` at native size or a binary fraction of it.",
+      "**Do** give every generator tile the same plate: name, picked kind, grid, audience.",
+      "**Do** use red only for the band, pressable or selected things, and errors; use Band Red Deep only for the hover of a filled red surface.",
+      "**Do** open a section with a 2px ink rule and separate its rows with 1px hairlines.",
+      "**Do** keep corners at 0 and surfaces flat.",
+      "**Do** set seeds, snippets and measurements in monospace, and everything else in Archivo 400 or 700.",
+      "**Do** keep a focus ring on every control: 2px red, ink on red fills, white on the band."
+    ],
+    "donts": [
+      "**Don't** put an avatar in a circle, a card, a shadow or a gradient; the transparency checker is the only pattern.",
+      "**Don't** smooth, blur or freely scale an avatar.",
+      "**Don't** add imagery other than avatars the crate drew.",
+      "**Don't** use `box-shadow` except the inset selection outline, or border-radius above 0.",
+      "**Don't** use a third font weight, italics, a second accent colour or a dark mode.",
+      "**Don't** set sentences in monospace or labels in red.",
+      "**Don't** request fonts or assets from another origin; type is self-hosted."
+    ]
+  }
+}
