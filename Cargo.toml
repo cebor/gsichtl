@@ -5,6 +5,7 @@ edition = "2024"
 rust-version = "1.91"
 license = "MIT"
 description = "Deterministic pixel-art avatars from any seed: monsters, nerdy faces, robots, crests, badges, realms and retro sprites"
+homepage = "https://cebor.github.io/gsichtl/"
 repository = "https://github.com/cebor/gsichtl"
 keywords = ["avatar", "pixel-art", "identicon", "generator"]
 categories = ["graphics", "multimedia::images"]
