@@ -1,11 +1,11 @@
 //! Deterministic pixel-art avatars from any seed.
 //!
-//! [`monster`] and [`nerd`] draw 8x8 faces, [`face`] picks one of the two by
-//! the seed, [`crest`] draws a 10x10 shield with a division and an emblem,
-//! [`badge`] a 12x12 round badge with a division, an emblem and sometimes
-//! a rim, [`realm`] a 20x20 floating island, planet or patch of sea,
-//! [`retro`] a 20x20 game sprite, and [`icon`] picks a realm or a retro
-//! sprite by the seed.
+//! [`monster`], [`nerd`] and [`robot`] draw 8x8 faces, [`face`] picks a
+//! monster or a nerd by the seed, [`crest`] draws a 10x10 shield with a
+//! division and an emblem, [`badge`] a 12x12 round badge with a division,
+//! an emblem and sometimes a rim, [`realm`] a 20x20 floating island, planet
+//! or patch of sea, [`retro`] a 20x20 game sprite, and [`icon`] picks a
+//! realm or a retro sprite by the seed.
 //! The seed is any byte string, typically a public user or group id.
 //!
 //! ```
@@ -37,6 +37,7 @@ mod monster;
 mod nerd;
 mod realm;
 mod retro;
+mod robot;
 
 use draws::Draws;
 
@@ -55,6 +56,7 @@ pub enum Kind {
     Badge,
     Realm,
     Retro,
+    Robot,
 }
 
 /// A square grid of colored cells on a background.
@@ -96,6 +98,11 @@ pub fn monster(seed: &[u8]) -> Avatar {
 /// An 8x8 nerdy human face.
 pub fn nerd(seed: &[u8]) -> Avatar {
     nerd::build(nerd::draw(&mut Draws::new(nerd::CONTEXT, seed)))
+}
+
+/// An 8x8 robot head with glowing eyes.
+pub fn robot(seed: &[u8]) -> Avatar {
+    robot::build(robot::draw(&mut Draws::new(robot::CONTEXT, seed)))
 }
 
 /// A 10x10 crest, for groups.

@@ -5,6 +5,8 @@ Deterministic pixel-art avatars from any seed. *Gsichtl* is Bavarian for
 
 ![32 generated faces](docs/faces.png)
 
+![16 generated robots](docs/robots.png)
+
 ![16 generated crests, 16 generated badges, 16 generated realms and 16 generated retro sprites](docs/groups.png)
 
 The seed is any byte string, typically a public user or group id. The same
@@ -22,6 +24,10 @@ an optional feature.
   sometimes headphones. Up to 1,327,104 nerds: 4 backgrounds, 6 skins,
   8 hair colors, 3 frames, 6 accents, 2 heads, 6 hair styles, 4 eyes,
   4 mouths and with or without headphones.
+- `gsichtl::robot(seed)`: an 8x8 robot head with glowing eyes, an antenna, a
+  siren or a propeller, and sometimes bolts. Up to 1,152,000 robots:
+  4 backgrounds, 8 hulls, 5 glows, 6 accents, 4 heads, 5 tops, 5 eyes,
+  4 mouths and 3 sides.
 - `gsichtl::face(seed)`: a monster or a nerd, chosen by the seed (about half
   each). It is not necessarily `monster(seed)` or `nerd(seed)`.
 - `gsichtl::crest(seed)`: a 10x10 shield with a division and an emblem, for
@@ -111,9 +117,10 @@ assert_eq!(&image.pixels[..4], &[0, 0, 0, 0]);
 
 The seed goes through BLAKE3 in derive-key mode, with one context string per
 generator: `gsichtl 2026-10-02 face v1`, `gsichtl 2026-10-02 monster v1`,
-`gsichtl 2026-10-02 nerd v1`, `gsichtl 2026-10-02 crest v1`,
-`gsichtl 2026-10-03 badge v1`, `gsichtl 2026-10-03 realm v1`,
-`gsichtl 2026-10-03 retro v1` and `gsichtl 2026-10-03 icon v1`. The
+`gsichtl 2026-10-02 nerd v1`, `gsichtl 2026-11-02 robot v1`,
+`gsichtl 2026-10-02 crest v1`, `gsichtl 2026-10-03 badge v1`,
+`gsichtl 2026-10-03 realm v1`, `gsichtl 2026-10-03 retro v1` and
+`gsichtl 2026-10-03 icon v1`. The
 extendable output is the stream of draws:
 each draw takes 4 bytes, modulo the number of choices. The parts are small
 character grids, painted in a fixed order. Eyes, brows and mouths are clipped
@@ -129,16 +136,19 @@ picture.
 cargo run --example render --features png -- <dir> [count]
 ```
 
-writes `face-NN.png` from the seed `user-N`, and `crest-NN.png`,
-`badge-NN.png`, `realm-NN.png` and `retro-NN.png` from the seed `community-N`
-into `<dir>`. Faces and badges have 16 px cells and an 8 px margin. Crests
-have 18 px cells and a 14 px margin; realms and retro sprites have 10 px cells
-and a 4 px margin on a transparent background, so all of them are 208 px wide
-like a badge. The sheets above show 32 faces, and 16 crests above 16 badges
-above 16 realms above 16 retro sprites:
+writes `face-NN.png` and `robot-NN.png` from the seed `user-N`, and
+`crest-NN.png`, `badge-NN.png`, `realm-NN.png` and `retro-NN.png` from the
+seed `community-N` into `<dir>`. Faces, robots and badges have 16 px cells and
+an 8 px margin. Crests have 18 px cells and a 14 px margin; realms and retro
+sprites have 10 px cells and a 4 px margin on a transparent background, so all
+of them are 208 px wide like a badge. The sheets above show 32 faces,
+16 robots, and 16 crests above 16 badges above 16 realms above 16 retro
+sprites:
 
 ```sh
 magick montage <dir>/face-*.png -tile 8x -geometry +4+4 -background none docs/faces.png
+magick montage <dir>/robot-0?.png <dir>/robot-1[0-5].png \
+    -tile 8x -geometry +4+4 -background none docs/robots.png
 magick montage <dir>/crest-0?.png <dir>/crest-1[0-5].png \
     <dir>/badge-0?.png <dir>/badge-1[0-5].png \
     <dir>/realm-0?.png <dir>/realm-1[0-5].png \

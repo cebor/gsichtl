@@ -22,6 +22,7 @@ fn seeds_keep_their_pictures() {
         fingerprint(&gsichtl::realm(b"alice")),
         fingerprint(&gsichtl::retro(b"alice")),
         fingerprint(&gsichtl::icon(b"alice")),
+        fingerprint(&gsichtl::robot(b"alice")),
         fingerprint(&gsichtl::face(&zero)),
         fingerprint(&gsichtl::monster(&zero)),
         fingerprint(&gsichtl::nerd(&zero)),
@@ -30,6 +31,7 @@ fn seeds_keep_their_pictures() {
         fingerprint(&gsichtl::realm(&zero)),
         fingerprint(&gsichtl::retro(&zero)),
         fingerprint(&gsichtl::icon(&zero)),
+        fingerprint(&gsichtl::robot(&zero)),
     ];
     let want = [
         "b79f342b2e7442884798392a11322461b9a4cdb70cce51d9cc24c06bcddff32a",
@@ -40,6 +42,7 @@ fn seeds_keep_their_pictures() {
         "827dedecc3ed64dd12ca01093fd71c82b6d729bc2ad8c17e0438d6d8a8f4fd82",
         "993186cf9673f751201e3b3aa4d416552390c159f4ea11bdaf526476d82240ce",
         "6b22d674dbc3ee4b5438ce7c3543cd04d531a4a6143f081fbf5f4a7420515c77",
+        "a336f0272aa11863db8c3893d1a3142538b55193848ae41b2e4c5bd4388d1303",
         "0bc86f28b5b9909abb0f000a871953b2cd68e3f3d44ff1b4ee8a3949b7b77cde",
         "e444dc102577ec0713cf8bf1e2c787e35ad3e323964f05cf7c86a4db9dd52af5",
         "16f5370130d7c99666b42fbd9ed28f50f9a116ba87651b277a4baa39c31f0e1f",
@@ -48,6 +51,7 @@ fn seeds_keep_their_pictures() {
         "b75358fe3b1d364ab8728aa1cdd10d8bb018ae2f09a0b39e36885426a9269852",
         "1b1ffc040a63e8fb2d629dd680c428819297ec47d7c52cd705be1d7ffab6966c",
         "090464bdca5a8559cc5482df5783422278108a96975eddddc6ca7dfecdb72e4b",
+        "6865ee7763b604cc547ea4d22ce5abb1102e54f706897f41ae108bdbc15c165b",
     ];
     assert_eq!(got, want);
 }
@@ -64,6 +68,7 @@ fn distinct_seeds_look_distinct() {
     assert!(distinct(gsichtl::face) >= 990);
     assert!(distinct(gsichtl::monster) >= 990);
     assert!(distinct(gsichtl::nerd) >= 990);
+    assert!(distinct(gsichtl::robot) >= 990);
     // Only 28,800 crests exist, so about 17 collisions in 1000 are expected.
     assert!(distinct(gsichtl::crest) >= 950);
     // Only 57,600 badges exist, so a few collisions in 1000 are expected.

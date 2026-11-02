@@ -1,4 +1,4 @@
-//! Writes sample faces, crests, badges, realms and retro sprites as PNG files.
+//! Writes sample faces, robots, crests, badges, realms and retro sprites as PNG files.
 //!
 //! `cargo run --example render --features png -- <out-dir> [count]`
 
@@ -18,6 +18,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     for n in 0..count {
         let face = gsichtl::face(format!("user-{n}").as_bytes());
         std::fs::write(dir.join(format!("face-{n:02}.png")), face.to_png(16, 8)?)?;
+        let robot = gsichtl::robot(format!("user-{n}").as_bytes());
+        std::fs::write(dir.join(format!("robot-{n:02}.png")), robot.to_png(16, 8)?)?;
         let crest = gsichtl::crest(format!("community-{n}").as_bytes());
         // 18 px cells and a 14 px margin: 208 px, as large as a badge, so both fit one sheet.
         std::fs::write(dir.join(format!("crest-{n:02}.png")), crest.to_png(18, 14)?)?;

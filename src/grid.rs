@@ -161,6 +161,7 @@ mod tests {
     fn parts_are_well_formed() {
         check("monster", crate::monster::SIDE, crate::monster::PARTS);
         check("nerd", crate::nerd::SIDE, crate::nerd::PARTS);
+        check("robot", crate::robot::SIDE, crate::robot::PARTS);
         check("crest", crate::crest::SIDE, crate::crest::PARTS);
         check("badge", crate::badge::SIDE, crate::badge::PARTS);
         check("realm", crate::realm::SIDE, crate::realm::PARTS);
