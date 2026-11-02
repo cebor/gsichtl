@@ -1,11 +1,13 @@
 //! Deterministic pixel-art avatars from any seed.
 //!
 //! [`monster`], [`nerd`] and [`robot`] draw 8x8 faces, [`face`] picks a
-//! monster or a nerd by the seed, [`crest`] draws a 10x10 shield with a
-//! division and an emblem, [`badge`] a 12x12 round badge with a division,
-//! an emblem and sometimes a rim, [`realm`] a 20x20 floating island, planet
-//! or patch of sea, [`retro`] a 20x20 game sprite, and [`icon`] picks a
-//! realm or a retro sprite by the seed.
+//! monster or a nerd by the seed, and [`monster12`], [`nerd12`],
+//! [`robot12`] and [`face12`] do the same at 12x12, with their own parts
+//! and their own draws. [`crest`] draws a 10x10 shield with a division and
+//! an emblem, [`badge`] a 12x12 round badge with a division, an emblem and
+//! sometimes a rim, [`realm`] a 20x20 floating island, planet or patch of
+//! sea, [`retro`] a 20x20 game sprite, and [`icon`] picks a realm or a
+//! retro sprite by the seed.
 //! The seed is any byte string, typically a public user or group id.
 //!
 //! ```
@@ -34,10 +36,13 @@ mod crest;
 mod draws;
 mod grid;
 mod monster;
+mod monster12;
 mod nerd;
+mod nerd12;
 mod realm;
 mod retro;
 mod robot;
+mod robot12;
 
 use draws::Draws;
 
@@ -45,6 +50,7 @@ use draws::Draws;
 pub type Rgb = [u8; 3];
 
 const FACE_CONTEXT: &str = "gsichtl 2026-10-02 face v1";
+const FACE12_CONTEXT: &str = "gsichtl 2026-11-02 face12 v1";
 const ICON_CONTEXT: &str = "gsichtl 2026-10-03 icon v1";
 
 /// What a generator drew.
@@ -103,6 +109,38 @@ pub fn nerd(seed: &[u8]) -> Avatar {
 /// An 8x8 robot head with glowing eyes.
 pub fn robot(seed: &[u8]) -> Avatar {
     robot::build(robot::draw(&mut Draws::new(robot::CONTEXT, seed)))
+}
+
+/// A 12x12 monster. It draws from its own context string, so it is not a
+/// larger [`monster`] for the same seed.
+pub fn monster12(seed: &[u8]) -> Avatar {
+    monster12::build(monster12::draw(&mut Draws::new(monster12::CONTEXT, seed)))
+}
+
+/// A 12x12 nerdy human face, sometimes with a beard. It draws from its own
+/// context string, so it is not a larger [`nerd`] for the same seed.
+pub fn nerd12(seed: &[u8]) -> Avatar {
+    nerd12::build(nerd12::draw(&mut Draws::new(nerd12::CONTEXT, seed)))
+}
+
+/// A 12x12 robot head with glowing eyes. It draws from its own context
+/// string, so it is not a larger [`robot`] for the same seed.
+pub fn robot12(seed: &[u8]) -> Avatar {
+    robot12::build(robot12::draw(&mut Draws::new(robot12::CONTEXT, seed)))
+}
+
+/// A 12x12 monster or nerd, chosen by the seed: the 12x12 counterpart of
+/// [`face`].
+///
+/// The choice consumes draws, so `face12(seed)` is not necessarily
+/// `monster12(seed)` or `nerd12(seed)` for the same seed.
+pub fn face12(seed: &[u8]) -> Avatar {
+    let mut draws = Draws::new(FACE12_CONTEXT, seed);
+    if draws.pick(2) == 0 {
+        monster12::build(monster12::draw(&mut draws))
+    } else {
+        nerd12::build(nerd12::draw(&mut draws))
+    }
 }
 
 /// A 10x10 crest, for groups.

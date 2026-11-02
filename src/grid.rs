@@ -162,6 +162,9 @@ mod tests {
         check("monster", crate::monster::SIDE, crate::monster::PARTS);
         check("nerd", crate::nerd::SIDE, crate::nerd::PARTS);
         check("robot", crate::robot::SIDE, crate::robot::PARTS);
+        check("monster12", crate::monster12::SIDE, crate::monster12::PARTS);
+        check("nerd12", crate::nerd12::SIDE, crate::nerd12::PARTS);
+        check("robot12", crate::robot12::SIDE, crate::robot12::PARTS);
         check("crest", crate::crest::SIDE, crate::crest::PARTS);
         check("badge", crate::badge::SIDE, crate::badge::PARTS);
         check("realm", crate::realm::SIDE, crate::realm::PARTS);

@@ -8,7 +8,7 @@ pub(crate) const CONTEXT: &str = "gsichtl 2026-11-02 robot v1";
 pub(crate) const SIDE: u8 = 8;
 
 /// (body, trim): the trim is the darker shade, for bolts and antenna stalks.
-const HULLS: [(Rgb, Rgb); 8] = [
+pub(crate) const HULLS: [(Rgb, Rgb); 8] = [
     (hex(0xadb5bd), hex(0x6c757d)), // steel
     (hex(0x5c677d), hex(0x3a4252)), // gunmetal
     (hex(0x7f9cb5), hex(0x4a6a85)), // chrome blue
@@ -20,7 +20,7 @@ const HULLS: [(Rgb, Rgb); 8] = [
 ];
 
 /// LED colors for eyes and glowing mouths.
-const GLOWS: [Rgb; 5] = [
+pub(crate) const GLOWS: [Rgb; 5] = [
     hex(0x22e6ff), // cyan
     hex(0xff3b3b), // red
     hex(0x5cff6e), // green

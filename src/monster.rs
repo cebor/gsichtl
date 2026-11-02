@@ -7,7 +7,7 @@ use crate::{Avatar, Kind, Rgb};
 pub(crate) const CONTEXT: &str = "gsichtl 2026-10-02 monster v1";
 pub(crate) const SIDE: u8 = 8;
 
-const BODIES: [Rgb; 10] = [
+pub(crate) const BODIES: [Rgb; 10] = [
     hex(0x7c5cff),
     hex(0xff6b6b),
     hex(0x4ecdc4),

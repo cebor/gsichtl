@@ -23,6 +23,10 @@ fn seeds_keep_their_pictures() {
         fingerprint(&gsichtl::retro(b"alice")),
         fingerprint(&gsichtl::icon(b"alice")),
         fingerprint(&gsichtl::robot(b"alice")),
+        fingerprint(&gsichtl::monster12(b"alice")),
+        fingerprint(&gsichtl::nerd12(b"alice")),
+        fingerprint(&gsichtl::robot12(b"alice")),
+        fingerprint(&gsichtl::face12(b"alice")),
         fingerprint(&gsichtl::face(&zero)),
         fingerprint(&gsichtl::monster(&zero)),
         fingerprint(&gsichtl::nerd(&zero)),
@@ -32,6 +36,10 @@ fn seeds_keep_their_pictures() {
         fingerprint(&gsichtl::retro(&zero)),
         fingerprint(&gsichtl::icon(&zero)),
         fingerprint(&gsichtl::robot(&zero)),
+        fingerprint(&gsichtl::monster12(&zero)),
+        fingerprint(&gsichtl::nerd12(&zero)),
+        fingerprint(&gsichtl::robot12(&zero)),
+        fingerprint(&gsichtl::face12(&zero)),
     ];
     let want = [
         "b79f342b2e7442884798392a11322461b9a4cdb70cce51d9cc24c06bcddff32a",
@@ -43,6 +51,10 @@ fn seeds_keep_their_pictures() {
         "993186cf9673f751201e3b3aa4d416552390c159f4ea11bdaf526476d82240ce",
         "6b22d674dbc3ee4b5438ce7c3543cd04d531a4a6143f081fbf5f4a7420515c77",
         "a336f0272aa11863db8c3893d1a3142538b55193848ae41b2e4c5bd4388d1303",
+        "180773bb9d0b5da663779aa560ae89c5c662918c9f4abd95d2b1a36f070e7ffb",
+        "2d2ee86c804412c5602a934055f6b6a9b020e52b05efc4376c731a6f379f0cfa",
+        "31cf9be4f05f1fe228cf4b93fbefa1143267e6fa2f95fb6060ddcdf3606d0fb5",
+        "8715821c001f2e3ff6da17cb5134d596ac259824a3e9e5100ed4f3a51f140ba3",
         "0bc86f28b5b9909abb0f000a871953b2cd68e3f3d44ff1b4ee8a3949b7b77cde",
         "e444dc102577ec0713cf8bf1e2c787e35ad3e323964f05cf7c86a4db9dd52af5",
         "16f5370130d7c99666b42fbd9ed28f50f9a116ba87651b277a4baa39c31f0e1f",
@@ -52,6 +64,10 @@ fn seeds_keep_their_pictures() {
         "1b1ffc040a63e8fb2d629dd680c428819297ec47d7c52cd705be1d7ffab6966c",
         "090464bdca5a8559cc5482df5783422278108a96975eddddc6ca7dfecdb72e4b",
         "6865ee7763b604cc547ea4d22ce5abb1102e54f706897f41ae108bdbc15c165b",
+        "725d42faec8ec58e4ae2eab7fa57e2a5eb7cd106992588b4b332a4782ad13716",
+        "ba9e9cc9fcbc9a937dd3c384b8853173a1343ccf415e89ceb0c4beb8c1b58b88",
+        "77b08221d402402692c8e39d85b79b1f8556ef04d765beda5e3d67b6d01e97d7",
+        "5a7859a57c50757a51f1ec8b9cbed2996611234a29a8a328c83dbb9b5d345be9",
     ];
     assert_eq!(got, want);
 }
@@ -69,6 +85,10 @@ fn distinct_seeds_look_distinct() {
     assert!(distinct(gsichtl::monster) >= 990);
     assert!(distinct(gsichtl::nerd) >= 990);
     assert!(distinct(gsichtl::robot) >= 990);
+    assert!(distinct(gsichtl::monster12) >= 990);
+    assert!(distinct(gsichtl::nerd12) >= 990);
+    assert!(distinct(gsichtl::robot12) >= 990);
+    assert!(distinct(gsichtl::face12) >= 990);
     // Only 28,800 crests exist, so about 17 collisions in 1000 are expected.
     assert!(distinct(gsichtl::crest) >= 950);
     // Only 57,600 badges exist, so a few collisions in 1000 are expected.
@@ -88,6 +108,21 @@ fn faces_mix_monsters_and_nerds() {
         .collect();
     let monsters = kinds.iter().filter(|&&k| k == Kind::Monster).count();
     assert!(kinds.iter().all(|&k| k == Kind::Monster || k == Kind::Nerd));
+    assert!((400..=600).contains(&monsters), "{monsters} monsters");
+}
+
+#[test]
+fn faces12_mix_monsters_and_nerds() {
+    let faces: Vec<Avatar> = (0u32..1000)
+        .map(|n| gsichtl::face12(&n.to_le_bytes()))
+        .collect();
+    assert!(faces.iter().all(|f| f.side() == 12));
+    assert!(
+        faces
+            .iter()
+            .all(|f| matches!(f.kind(), Kind::Monster | Kind::Nerd))
+    );
+    let monsters = faces.iter().filter(|f| f.kind() == Kind::Monster).count();
     assert!((400..=600).contains(&monsters), "{monsters} monsters");
 }
 

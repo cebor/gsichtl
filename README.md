@@ -7,6 +7,8 @@ Deterministic pixel-art avatars from any seed. *Gsichtl* is Bavarian for
 
 ![16 generated robots](docs/robots.png)
 
+![8 generated monsters, 8 nerds and 8 robots at 12x12](docs/faces12.png)
+
 ![16 generated crests, 16 generated badges, 16 generated realms and 16 generated retro sprites](docs/groups.png)
 
 The seed is any byte string, typically a public user or group id. The same
@@ -30,6 +32,22 @@ an optional feature.
   4 mouths and 3 sides.
 - `gsichtl::face(seed)`: a monster or a nerd, chosen by the seed (about half
   each). It is not necessarily `monster(seed)` or `nerd(seed)`.
+- `gsichtl::monster12(seed)`: a 12x12 monster with antennae, horns, ears or a
+  crown, big eyes and a mouth, sometimes with fangs or a tongue. Up to 967,680
+  monsters: 4 backgrounds, 10 bodies, 6 accents, 7 tops, 4 silhouettes,
+  4 brows, 6 eyes and 6 mouths.
+- `gsichtl::nerd12(seed)`: a 12x12 human face with hair, glasses, shades or
+  goggles, sometimes a beard and sometimes headphones. Up to 8,294,400 nerds:
+  4 backgrounds, 6 skins, 8 hair colors, 3 frames, 6 accents, 3 heads, 8 hair
+  styles, 5 eyes, 5 mouths, with or without a beard and with or without
+  headphones.
+- `gsichtl::robot12(seed)`: a 12x12 robot head with glowing eyes, an antenna,
+  a siren, a propeller or rabbit ears, and sometimes bolts or rivets. Up to
+  3,456,000 robots: 4 backgrounds, 8 hulls, 5 glows, 6 accents, 5 heads,
+  6 tops, 6 eyes, 5 mouths and 4 sides.
+- `gsichtl::face12(seed)`: a 12x12 monster or nerd, chosen by the seed (about
+  half each), the 12x12 counterpart of `face`. It is not necessarily
+  `monster12(seed)` or `nerd12(seed)`.
 - `gsichtl::crest(seed)`: a 10x10 shield with a division and an emblem, for
   groups. 28,800 crests: 4 backgrounds, 6 fields, 5 second fields, 2 metals,
   3 shields, 5 divisions and 8 emblems.
@@ -56,6 +74,10 @@ an optional feature.
 
 The face counts are upper bounds: where no part uses the accent color, two
 faces that differ only in their accent look the same.
+
+The 12x12 generators draw from their own context strings, so `monster12(seed)`
+is a different monster than `monster(seed)`, and the same goes for nerds and
+robots.
 
 ## Installation
 
@@ -118,6 +140,8 @@ assert_eq!(&image.pixels[..4], &[0, 0, 0, 0]);
 The seed goes through BLAKE3 in derive-key mode, with one context string per
 generator: `gsichtl 2026-10-02 face v1`, `gsichtl 2026-10-02 monster v1`,
 `gsichtl 2026-10-02 nerd v1`, `gsichtl 2026-11-02 robot v1`,
+`gsichtl 2026-11-02 face12 v1`, `gsichtl 2026-11-02 monster12 v1`,
+`gsichtl 2026-11-02 nerd12 v1`, `gsichtl 2026-11-02 robot12 v1`,
 `gsichtl 2026-10-02 crest v1`, `gsichtl 2026-10-03 badge v1`,
 `gsichtl 2026-10-03 realm v1`, `gsichtl 2026-10-03 retro v1` and
 `gsichtl 2026-10-03 icon v1`. The
@@ -136,19 +160,22 @@ picture.
 cargo run --example render --features png -- <dir> [count]
 ```
 
-writes `face-NN.png` and `robot-NN.png` from the seed `user-N`, and
-`crest-NN.png`, `badge-NN.png`, `realm-NN.png` and `retro-NN.png` from the
-seed `community-N` into `<dir>`. Faces, robots and badges have 16 px cells and
-an 8 px margin. Crests have 18 px cells and a 14 px margin; realms and retro
-sprites have 10 px cells and a 4 px margin on a transparent background, so all
-of them are 208 px wide like a badge. The sheets above show 32 faces,
-16 robots, and 16 crests above 16 badges above 16 realms above 16 retro
-sprites:
+writes `face-NN.png`, `robot-NN.png`, `monster12-NN.png`, `nerd12-NN.png` and
+`robot12-NN.png` from the seed `user-N`, and `crest-NN.png`, `badge-NN.png`,
+`realm-NN.png` and `retro-NN.png` from the seed `community-N` into `<dir>`.
+Faces, robots, 12x12 faces and badges have 16 px cells and an 8 px margin.
+Crests have 18 px cells and a 14 px margin; realms and retro sprites have
+10 px cells and a 4 px margin on a transparent background, so the 12x12 faces
+and all group avatars are 208 px wide like a badge. The sheets above show
+32 faces, 16 robots, 8 monsters above 8 nerds above 8 robots at 12x12, and
+16 crests above 16 badges above 16 realms above 16 retro sprites:
 
 ```sh
 magick montage <dir>/face-*.png -tile 8x -geometry +4+4 -background none docs/faces.png
 magick montage <dir>/robot-0?.png <dir>/robot-1[0-5].png \
     -tile 8x -geometry +4+4 -background none docs/robots.png
+magick montage <dir>/monster12-0[0-7].png <dir>/nerd12-0[0-7].png \
+    <dir>/robot12-0[0-7].png -tile 8x -geometry +4+4 -background none docs/faces12.png
 magick montage <dir>/crest-0?.png <dir>/crest-1[0-5].png \
     <dir>/badge-0?.png <dir>/badge-1[0-5].png \
     <dir>/realm-0?.png <dir>/realm-1[0-5].png \

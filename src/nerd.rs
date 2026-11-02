@@ -7,7 +7,7 @@ use crate::{Avatar, Kind, Rgb};
 pub(crate) const CONTEXT: &str = "gsichtl 2026-10-02 nerd v1";
 pub(crate) const SIDE: u8 = 8;
 
-const SKINS: [Rgb; 6] = [
+pub(crate) const SKINS: [Rgb; 6] = [
     hex(0xffdbac),
     hex(0xf1c27d),
     hex(0xe0ac69),
@@ -15,7 +15,7 @@ const SKINS: [Rgb; 6] = [
     hex(0x8d5524),
     hex(0x5c3a21),
 ];
-const HAIRS: [Rgb; 8] = [
+pub(crate) const HAIRS: [Rgb; 8] = [
     hex(0x3b2a1e),
     hex(0x6f4e37),
     hex(0xb5651d),
@@ -25,7 +25,7 @@ const HAIRS: [Rgb; 8] = [
     hex(0x4ecdc4),
     hex(0xff6b6b),
 ];
-const FRAMES: [Rgb; 3] = [hex(0x11151c), hex(0xc92a2a), hex(0x1971c2)];
+pub(crate) const FRAMES: [Rgb; 3] = [hex(0x11151c), hex(0xc92a2a), hex(0x1971c2)];
 
 const HEADS: [Layer; 2] = [
     // plain
