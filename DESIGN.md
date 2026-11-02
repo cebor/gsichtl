@@ -205,7 +205,7 @@ A three-part palette: paper and sheet for surfaces, near-black for ink and heavy
 
 A single column band, then a full-width seed row, then a two-column work area. The container is capped at 82rem with a 1.5rem side gap (1rem under 30rem). The band is a three-part row (name and version, tagline, links) aligned on the baseline. The seed row spans the container, ruled by 2px ink above and a hairline below, with the label in a ruled cell on the left.
 
-The work area is 1.5fr to 1fr (the right column at least 22rem) with a 2.5rem gutter: the parts table on the left, the selected part on the right. Users are four tiles across, groups five. Under 66rem the detail moves below the tiles and the band stacks; under 30rem the tiles go three across. Install closes the page after 3.5rem.
+The work area is 1.5fr to 1fr (the right column at least 22rem) with a 2.5rem gutter: the parts table on the left, the selected part on the right. Users are four tiles across, groups five. Under 66rem the detail moves below the tiles and the band stacks; under 30rem the tiles go three across. Install follows after 3.5rem, and a footer closes the page after 3rem.
 
 Rhythm is a rem scale: 0.5, 0.75, 1, 1.5, 2.5, 3.5. Groups are 1.5rem apart; blocks inside the detail 1.25 to 1.5rem. Tiles sit on a 1px grid so the hairline between them is the only gutter.
 
@@ -252,6 +252,9 @@ A ruled datasheet table with the caption in a 2px ink rule. Columns: Parameter, 
 ### Code Block
 - **Style:** Code Tint ground between two hairlines; a header row with a bold ink-soft label (`Rust`, `Cargo.toml`) and a Copy button separated by a hairline.
 - **Body:** mono 0.875rem (1rem for the install line), wrapped, with 0.75rem 1rem padding.
+
+### Footer
+The colophon: a 2px ink rule across the container, then one row in 0.875rem ink soft, "gsichtl is made by Felix Itzenplitz." on the left and a bold ink, underlined link to https://itzenplitz.net/en/projects/ on the right. It wraps to two lines on narrow screens.
 
 ### Buttons
 - **Primary (Download PNG):** full-width, Band Red with white bold 1rem text, 0.9rem by 1rem padding, no radius. Hover darkens to Band Red Deep. Focus ring turns ink, because red on red would disappear.

@@ -298,6 +298,14 @@
       "description": "A datasheet table row: parameter, min, slider with field, max.",
       "html": "<table class=\"ds-cond\"><caption>Render options</caption><thead><tr><th>Parameter</th><th class=\"ds-num\">Min</th><th>Value</th><th class=\"ds-num\">Max</th></tr></thead><tbody><tr><th>Cell</th><td class=\"ds-num\">1</td><td><div class=\"ds-value\"><input type=\"range\" min=\"1\" max=\"32\" value=\"16\" aria-label=\"Cell range\"><span class=\"ds-f\">16 px</span></div></td><td class=\"ds-num\">32</td></tr></tbody></table>",
       "css": ".ds-cond{width:100%;border-collapse:collapse;table-layout:fixed;font:.9375rem/1.5 Archivo,'Helvetica Neue',Arial,sans-serif;font-variant-numeric:tabular-nums;color:#16181b}.ds-cond caption{text-align:left;font-weight:700;padding:.45rem 0;border-top:2px solid #16181b}.ds-cond th,.ds-cond td{padding:.45rem .5rem;border-bottom:1px solid #cfcdc5;text-align:left;vertical-align:middle}.ds-cond th:first-child,.ds-cond td:first-child{padding-left:0}.ds-cond thead th{font-size:.8125rem;color:#4a4e54;font-weight:700;border-bottom-color:#16181b}.ds-cond thead th:first-child{width:6.5rem}.ds-num{text-align:right;width:2.5rem;font-family:ui-monospace,Menlo,Consolas,monospace}.ds-value{display:flex;align-items:center;gap:.75rem}.ds-value input[type=range]{flex:1;min-width:4rem;accent-color:#c8102e}.ds-f{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.9375rem}"
+    },
+    {
+      "name": "Footer",
+      "kind": "custom",
+      "refersTo": "footer",
+      "description": "The colophon: a 2px ink rule, the maker on the left, a link to his other projects on the right.",
+      "html": "<footer class=\"ds-foot\"><p>gsichtl is made by Felix Itzenplitz.</p><a href=\"https://itzenplitz.net/en/projects/\">More projects at itzenplitz.net</a></footer>",
+      "css": ".ds-foot{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:.5rem 1.5rem;border-top:2px solid #16181b;padding-top:.5rem;font:400 .875rem/1.5 Archivo,'Helvetica Neue',Arial,sans-serif;color:#4a4e54}.ds-foot p{margin:0}.ds-foot a{color:#16181b;font-weight:700;text-underline-offset:.2em;text-decoration-thickness:1px}.ds-foot a:focus-visible{outline:2px solid #c8102e;outline-offset:2px}"
     }
   ],
   "narrative": {

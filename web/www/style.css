@@ -583,6 +583,37 @@ button.primary:focus-visible {
   padding: 1rem;
 }
 
+/* Footer */
+
+.colophon {
+  max-width: 82rem;
+  margin: 0 auto;
+  padding: 0 var(--gap) 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.5rem 1.5rem;
+  font-size: 0.875rem;
+  color: var(--ink-soft);
+}
+
+.colophon::before {
+  content: "";
+  flex: 0 0 100%;
+  border-top: 2px solid var(--ink);
+  margin-bottom: 0.25rem;
+}
+
+.colophon p {
+  margin: 0;
+}
+
+.colophon a {
+  color: var(--ink);
+  font-weight: 700;
+}
+
 @media (max-width: 66rem) {
   .band-inner {
     grid-template-columns: 1fr;
